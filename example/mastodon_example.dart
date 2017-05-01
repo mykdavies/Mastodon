@@ -4,6 +4,6 @@
 import 'package:mastodon/mastodon.dart';
 
 main() {
-  Mastodon m = new Mastodon();
-  print('awesome: $m');
+  final Mastodon m = new Mastodon();
+  print(m.getInstance());
 }

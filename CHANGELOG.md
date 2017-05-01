@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.0
+
+- Massive tidy-up with (nearly) every lint rule turned on.
+
 ## 0.0.5, 0.0.4
 
 - dartdocs is a harsh code critic :-(.

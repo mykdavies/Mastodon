@@ -19,7 +19,7 @@ void main() {
     });
 
     test('General account-related accesses', () {
-      expect(m.access_token, equals(properties['access_token']),
+      expect(m.accessToken, equals(properties['access_token']),
           reason: 'access token not stored correctly');
     });
 
@@ -31,7 +31,7 @@ void main() {
       expect(await m.findAccounts('myk*'), isNotEmpty,
           reason: 'No account search results received');
 
-      expect(m.access_token, equals(properties['access_token']),
+      expect(m.accessToken, equals(properties['access_token']),
           reason: 'access token not stored correctly');
     });
   });
@@ -73,34 +73,35 @@ void main() {
     });
 
     test('Confirm instance okay', () async {
-      Mastodon m = new Mastodon();
+      final Mastodon m = new Mastodon();
 
       expect(await m.getInstance(), isNotEmpty,
           reason: 'No access to instance.');
     });
 
-    test('Not logged on', () async {
-      Mastodon m = new Mastodon();
+    test('Not logged on', () {
+      final Mastodon m = new Mastodon();
 
       // Use expectLater to allow the Error to be caught by the matcher.
       expectLater(m.verifyAccount(), throwsUnsupportedError,
-          reason: 'Password logon failed.');
+          reason: 'Access allowed without authentication.');
     });
 
     test('Password logon', () async {
-      Mastodon m = new Mastodon();
-      expectLater(m.log_in(properties['username'], 'verywrongpassword'),
+      final Mastodon m = new Mastodon();
+      // ignore: unawaited_futures
+      expectLater(m.logIn(properties['username'], 'verywrongpassword'),
           throwsArgumentError,
           reason: 'Incorrect password did not raise error.');
-      await m.log_in(properties['username'], properties['password']);
-      expect(m.access_token, isNotEmpty,
+      await m.logIn(properties['username'], properties['password']);
+      expect(m.accessToken, isNotEmpty,
           reason: 'OAuth access token not saved');
       expect(await m.verifyAccount(), isNotNull,
           reason: 'Password logon failed.');
     });
 
     test('OAuth logon', () async {
-      Mastodon m = new Mastodon.usingAccessToken(properties['access_token']);
+      final Mastodon m = new Mastodon.usingAccessToken(properties['access_token']);
       expect(await m.verifyAccount(), isNotNull,
           reason: 'Access token logon failed.');
     });

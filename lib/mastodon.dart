@@ -15,7 +15,7 @@ import 'package:http/http.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'package:mime/mime.dart';
-import 'package:http_parser/src/media_type.dart';
+import 'package:http_parser/http_parser.dart';
 // Needed in order to guess extension given mime-type.
 import 'package:mime/src/default_extension_map.dart';
 import 'dart:math';
@@ -29,80 +29,87 @@ import 'src/mastodon_base.dart';
 /// Simple API to allow access to a Mastodon server.
 class Mastodon {
   /// Default Mastodon instance.
-  static const String __DEFAULT_BASE_URL = 'mastodon.cloud';
+  static const String _defaultBaseUrl = 'mastodon.cloud';
   /// Timeout for all requests to the server in milliseconds.
-  static const int __DEFAULT_TIMEOUT = 300;
+  static const int _defaultTimeout = 300;
 
-  static Dartson _DSON;
+  static Dartson _dson;
 
-  /// OAuth credentials
-  String client_id;
-  String client_secret;
-  String access_token;
-  String api_base_url;
+  // OAuth credentials
+  /// OAuth id.
+  String clientId;
+  /// OAuth client secret.
+  String clientSecret;
+  /// OAuth generated access token.
+  String accessToken;
+  /// Base URL for the wanted Mastodon server.
+  String apiBaseUrl;
 
+  // TODO: implement rate limiting.
   /// Determine what to do in case of server throttling.
-  /// TODO: implement rate limiting.
-  String ratelimit_method;
-  num ratelimit_pacefactor;
-  int request_timeout;
+  String ratelimitMethod;
+  /// Timing for rate-limiting.
+  num ratelimitPaceFactor;
+  /// Request timeout.
+  int requestTimeout;
 
   /// Set to `true` to get *some* **simple** /debug/ messages.
   bool debug = false;
 
   // ignore: unused_field
-  String _refresh_token;
+  String _refreshToken;
 
   // ignore: unused_field
-  int _token_expired;
-
-  /// Easiest way to create the server (if you have your token already).
-  factory Mastodon.usingAccessToken(String access_token) {
-    return new Mastodon(access_token: access_token);
-  }
+  int _tokenExpired;
 
   /// Default constructor that gives full access.
   Mastodon(
-      {String this.client_id: '',
-        String this.client_secret: '',
-        String this.access_token: '',
-        String this.api_base_url: __DEFAULT_BASE_URL,
-        bool this.debug: false,
-        String this.ratelimit_method: 'wait',
-        num this.ratelimit_pacefactor: 1.1,
-        this.request_timeout: __DEFAULT_TIMEOUT,
+      {this.clientId: '',
+        this.clientSecret: '',
+        this.accessToken: '',
+        this.apiBaseUrl: _defaultBaseUrl,
+        this.debug: false,
+        this.ratelimitMethod: 'wait',
+        this.ratelimitPaceFactor: 1.1,
+        this.requestTimeout: _defaultTimeout,
         String credentials: ''}) {
-    if (!["throw", "wait", "pace"].contains(ratelimit_method)) {
+    if (!["throw", "wait", "pace"].contains(ratelimitMethod)) {
       throw new MastodonIllegalArgumentError('Invalid ratelimit method.');
     }
 
-    _DSON = new Dartson.JSON();
-    _DSON.addTransformer(new DateTimeParser(), DateTime);
+    _dson = new Dartson.JSON();
+    _dson.addTransformer(new DateTimeParser(), DateTime);
   }
 
+  /// Easiest way to create the server (if you have your token already).
+  factory Mastodon.usingAccessToken(String accessToken) {
+    return new Mastodon(accessToken: accessToken);
+  }
+
+
   /// Use supplied credentials to generate an OAuth authorisation code.
-  dynamic log_in(
+  dynamic logIn(
       [String username = "",
         String password = "",
         String code = '',
-        String redirect_uri = 'urn:ietf:wg:oauth:2.0:oob',
-        String refresh_token = '',
-        List<String> scopes = const ['read', 'write', 'follow'],
-        String to_file = '']) async {
-    Map params = {};
-    if (client_id.isNotEmpty && client_secret.isNotEmpty) {
+        String redirectUri = 'urn:ietf:wg:oauth:2.0:oob',
+        String refreshToken = '',
+        List<String> scopes = const<String> ['read', 'write', 'follow'],
+        String toFile = '']) async {
+    final Map params = {};
+    if (clientId.isNotEmpty && clientSecret.isNotEmpty) {
       // Use OAuth ID and secret if provided.
-      params['client_id'] = this.client_id;
-      params['client_secret'] = this.client_secret;
+      params['client_id'] = this.clientId;
+      params['client_secret'] = this.clientSecret;
     } else if (code.isNotEmpty) {
       // Check for an OAuth authorisation code.
       params['code'] = code;
       params['grant_type'] = 'authorization_code';
-    } else if (refresh_token.isNotEmpty) {
+    } else if (refreshToken.isNotEmpty) {
       // An OAuth refresh token can be used to generate
       // a new OAuth authorisation code.
       // Not supported by Mastodon at present?
-      params['refresh_token'] = refresh_token;
+      params['refresh_token'] = refreshToken;
       params['grant_type'] = 'refresh_token';
     } else if (username.isNotEmpty && password.isNotEmpty) {
       // Use the account username and password to generate an OAuth
@@ -117,19 +124,19 @@ class Mastodon {
               ' or username+password are required.');
     }
 
-    params['client_id'] = this.client_id;
-    params['client_secret'] = this.client_secret;
+    params['client_id'] = this.clientId;
+    params['client_secret'] = this.clientSecret;
     params['scope'] = scopes.join(' ');
 
-    var pp = _makeParamMap(params);
+    final pp = _makeParamMap(params);
     Map response;
     try {
-      response = await _api_request('POST', '/oauth/token', pp, {}, false);
-      access_token = response['access_token'];
-      _refresh_token = response.containsKey('refresh_token')
+      response = await _apiRequest('POST', '/oauth/token', pp, {}, false);
+      accessToken = response['access_token'];
+      _refreshToken = response.containsKey('refresh_token')
           ? response['refresh_token']
           : '';
-      _token_expired =
+      _tokenExpired =
       response.containsKey('expires_in') ? response['expires_in'] : 0;
     } catch (e) {
       if (username.isNotEmpty || password.isNotEmpty) {
@@ -143,30 +150,31 @@ class Mastodon {
       }
     }
 
-    dynamic sorted(list) {
-      var l = list.sublist(0);
+    dynamic _sorted(list) {
+      final l = list.sublist(0);
+      // ignore: cascade_invocations
       l.sort();
       return l;
     }
 
-    var requested_scopes = sorted(scopes).join(' ');
-    var returned_scopes = sorted(response['scope'].split(' ')).join(' ');
+    final requestedScopes = _sorted(scopes).join(' ');
+    final returnedScopes = _sorted(response['scope'].split(' ')).join(' ');
 
-    if (returned_scopes != requested_scopes) {
-      throw new MastodonAPIError('Granted scopes "$returned_scopes"'
-          ' differ from requested scopes "$requested_scopes".');
+    if (returnedScopes != requestedScopes) {
+      throw new MastodonAPIError('Granted scopes "$returnedScopes"'
+          ' differ from requested scopes "$requestedScopes".');
     }
 
-    return access_token;
+    return accessToken;
   }
 
   /// Private utility method to manage all server requests.
-  dynamic _api_request(
+  dynamic _apiRequest(
       String method,
       String endpoint, [
         Map<String, String> params = const {},
         Map files = const {},
-        bool do_ratelimiting = true,
+        bool doRateLimiting = true,
       ]) async {
     var headers = {};
 
@@ -174,19 +182,19 @@ class Mastodon {
 
     // Generate request headers.
     // All other authorisation methods are handled by params.
-    if (access_token.isNotEmpty) {
-      headers = {'Authorization': 'Bearer ' + access_token};
+    if (accessToken.isNotEmpty) {
+      headers = {'Authorization': 'Bearer ' + accessToken};
     }
 
-    var pp = _makeParamMap(params);
+    final pp = _makeParamMap(params);
 
-    var request_complete = false;
-    StreamedResponse response_object;
+    var requestComplete = false;
+    StreamedResponse responseObject;
 
-    while (!request_complete) {
+    while (!requestComplete) {
       // This will be reset later if we are running into throttling issues.
-      request_complete = true;
-      var uri = new Uri.https(api_base_url, endpoint, pp);
+      requestComplete = true;
+      final uri = new Uri.https(apiBaseUrl, endpoint, pp);
 
       var request;
 
@@ -205,24 +213,24 @@ class Mastodon {
         print(request.headers);
         print(request.files);
       }
-      response_object = await request.send();
+      responseObject = await request.send();
 
       //TODO:  detect and handle timeout.
 
-      if (response_object.statusCode == 401) {
+      if (responseObject.statusCode == 401) {
         throw new MastodonAPIError('401 - Unauthorised access.');
       }
 
-      if (response_object.statusCode == 404) {
+      if (responseObject.statusCode == 404) {
         throw new MastodonAPIError('Endpoint not found.');
       }
 
-      if (response_object.statusCode == 500) {
+      if (responseObject.statusCode == 500) {
         throw new MastodonAPIError('General API problem.');
       }
     }
 
-    String body = await response_object.stream.bytesToString();
+    final String body = await responseObject.stream.bytesToString();
     var json;
     json = JSON.decode(body);
     return json;
@@ -231,9 +239,9 @@ class Mastodon {
   /// Ensure all values are strings, then remove any blank parameters.
   /// Handles simple DSON-able objects or Maps.
   Map<String, String> _makeParamMap(dynamic obj) {
-    var s = _DSON.encode(obj);
-    var map = JSON.decode(s);
-    var m = {};
+    final s = _dson.encode(obj);
+    final map = JSON.decode(s);
+    final m = {};
     map.keys.where((e) => map[e].toString().isNotEmpty).forEach((k) => m[k] = map[k].toString());
     return m;
   }
@@ -246,13 +254,13 @@ class Mastodon {
   dynamic postStatus(Post status) async {
     //TODO: check visibility is allowed.
 
-    Post s = status;
+    final Post s = status;
 
     if (!s.sensitivity) s.sensitivity = null;
 
-    Map<String, String> map = _makeParamMap(s);
+    final Map<String, String> map = _makeParamMap(s);
 
-    var response = await _api_request('POST', '/api/v1/statuses', map);
+    final response = await _apiRequest('POST', '/api/v1/statuses', map);
     return response;
   }
 
@@ -261,68 +269,68 @@ class Mastodon {
 
   /// Delete a Toot.
   dynamic deleteStatus(int id) async =>
-      await _api_request('DELETE', '/api/v1/statuses/$id');
+      await _apiRequest('DELETE', '/api/v1/statuses/$id');
 
   /// Reblog a Toot.
-  dynamic reblogStatus(int id) async => _DSON.map(
-      await _api_request('POST', '/api/v1/statuses/$id/reblog'), new Status());
+  dynamic reblogStatus(int id) async => _dson.map(
+      await _apiRequest('POST', '/api/v1/statuses/$id/reblog'), new Status());
 
   /// Un-reblog a Toot.
-  dynamic unreblogStatus(int id) async => _DSON.map(
-      await _api_request('POST', '/api/v1/statuses/$id/unreblog'),
+  dynamic unreblogStatus(int id) async => _dson.map(
+      await _apiRequest('POST', '/api/v1/statuses/$id/unreblog'),
       new Status());
 
   /// Favourite a Toot.
-  dynamic favouriteStatus(int id) async => _DSON.map(
-      await _api_request('POST', '/api/v1/statuses/$id/favourite'),
+  dynamic favouriteStatus(int id) async => _dson.map(
+      await _apiRequest('POST', '/api/v1/statuses/$id/favourite'),
       new Status());
 
   /// Un-favourite a Toot.
-  dynamic unfavouriteStatus(int id) async => _DSON.map(
-      await _api_request('POST', '/api/v1/statuses/$id/unfavourite'),
+  dynamic unfavouriteStatus(int id) async => _dson.map(
+      await _apiRequest('POST', '/api/v1/statuses/$id/unfavourite'),
       new Status());
 
   /// Post a media item to the server, for later inclusion in a Toot.
   ///
   /// Returns: a reference that can be added to the Toot.
-  dynamic postMedia(List media, String mime_type) async {
-    if (mime_type.isEmpty)
+  dynamic postMedia(List media, String mimeType) async {
+    if (mimeType.isEmpty)
       throw new MastodonIllegalArgumentError('No mime type provided.');
 
-    var date = new DateTime.now().toIso8601String();
+    final date = new DateTime.now().toIso8601String();
 
     // Overkill maybe?
-    var r = new Random();
-    List list = new List.generate(10, (i) => r.nextInt(9).toString());
-    var random_suffix = list.join();
+    final r = new Random();
+    final list = new List.generate(10, (i) => r.nextInt(9).toString());
+    final randomSuffix = list.join();
 
-    var ext = defaultExtensionMap.keys.firstWhere(
-            (k) => defaultExtensionMap[k] == mime_type,
+    final ext = defaultExtensionMap.keys.firstWhere(
+            (k) => defaultExtensionMap[k] == mimeType,
         orElse: () => '');
 
-    var name = 'mastodondartupload${date}_$random_suffix.$ext';
-    var mpf = new MultipartFile.fromBytes('file', media,
-        filename: name, contentType: new MediaType.parse(mime_type));
-    return _DSON.map(
-        await _api_request('POST', '/api/v1/media', {}, {'file': mpf}),
+    final name = 'mastodondartupload${date}_$randomSuffix.$ext';
+    final mpf = new MultipartFile.fromBytes('file', media,
+        filename: name, contentType: new MediaType.parse(mimeType));
+    return _dson.map(
+        await _apiRequest('POST', '/api/v1/media', {}, {'file': mpf}),
         new Attachment());
   }
 
   /// Simpler way of uploading a media item directly from a file.
-  dynamic postMediaFile(String media_file) async {
-    String mime_type;
-    MimeTypeResolver resolver = new MimeTypeResolver();
-    mime_type = resolver.lookup(media_file);
+  dynamic postMediaFile(String mediaFile) async {
+    String mimeType;
+    final MimeTypeResolver resolver = new MimeTypeResolver();
+    mimeType = resolver.lookup(mediaFile);
 
-    if (mime_type.isEmpty)
+    if (mimeType.isEmpty)
       throw new MastodonIllegalArgumentError('Could not tell mime type of file.');
 
-    List media = new File(media_file).readAsBytesSync();
+    final List media = new File(mediaFile).readAsBytesSync();
 
     if (media.isEmpty)
       throw new MastodonIllegalArgumentError('Could not read media file.');
 
-    return await postMedia(media, mime_type);
+    return await postMedia(media, mimeType);
   }
 
 
@@ -333,46 +341,46 @@ class Mastodon {
 
   /// Clear notifications.
   dynamic clearNotifications() async =>
-      await _api_request('DELETE', '/api/v1/notifications/clear');
+      await _apiRequest('DELETE', '/api/v1/notifications/clear');
 
   //
   // Updates to account relationships.
   //
 
   /// Follow an account.
-  dynamic followAccount(int id) async => _DSON.map(
-      await _api_request('POST', '/api/v1/accounts/$id/follow'),
+  dynamic followAccount(int id) async => _dson.map(
+      await _apiRequest('POST', '/api/v1/accounts/$id/follow'),
       new Relationship());
 
   /// Unfollow an account.
-  dynamic unfollowAccount(int id) async => _DSON.map(
-      await _api_request('POST', '/api/v1/accounts/$id/unfollow'),
+  dynamic unfollowAccount(int id) async => _dson.map(
+      await _apiRequest('POST', '/api/v1/accounts/$id/unfollow'),
       new Relationship());
 
   /// Block an account.
-  dynamic blockAccount(int id) async => _DSON.map(
-      await _api_request('POST', '/api/v1/accounts/$id/block'),
+  dynamic blockAccount(int id) async => _dson.map(
+      await _apiRequest('POST', '/api/v1/accounts/$id/block'),
       new Relationship());
 
   /// Unblock an account.
-  dynamic unblockAccount(int id) async => _DSON.map(
-      await _api_request('POST', '/api/v1/accounts/$id/unblock'),
+  dynamic unblockAccount(int id) async => _dson.map(
+      await _apiRequest('POST', '/api/v1/accounts/$id/unblock'),
       new Relationship());
 
   /// Mute an account.
-  dynamic muteAccount(int id) async => _DSON.map(
-      await _api_request('POST', '/api/v1/accounts/$id/mute'),
+  dynamic muteAccount(int id) async => _dson.map(
+      await _apiRequest('POST', '/api/v1/accounts/$id/mute'),
       new Relationship());
 
   /// Unmute an account.
-  dynamic unmuteAccount(int id) async => _DSON.map(
-      await _api_request('POST', '/api/v1/accounts/$id/unmute'),
+  dynamic unmuteAccount(int id) async => _dson.map(
+      await _apiRequest('POST', '/api/v1/accounts/$id/unmute'),
       new Relationship());
 
   /// Report an account.
-  dynamic reportAccount(int account_id, List<int> status_ids) async => _DSON.map(
-      await _api_request('POST', '/api/v1/reports',
-          _makeParamMap({'account_id': account_id, 'status_ids': status_ids})),
+  dynamic reportAccount(int accountId, List<int> statusIds) async => _dson.map(
+      await _apiRequest('POST', '/api/v1/reports',
+          _makeParamMap({'account_id': accountId, 'status_ids': statusIds})),
       new Report());
 
   //
@@ -380,13 +388,13 @@ class Mastodon {
   //
 
   /// Accept a follow request.
-  dynamic authoriseFollowRequest(int id) async => _DSON.map(
-      await _api_request('POST', '/api/v1/follow_requests/$id/authorize'),
+  dynamic authoriseFollowRequest(int id) async => _dson.map(
+      await _apiRequest('POST', '/api/v1/follow_requests/$id/authorize'),
       new Account());
 
   /// Reject a follow request.
-  dynamic rejectFollowRequest(int id) async => _DSON.map(
-      await _api_request('POST', '/api/v1/follow_requests/$id/reject'),
+  dynamic rejectFollowRequest(int id) async => _dson.map(
+      await _apiRequest('POST', '/api/v1/follow_requests/$id/reject'),
       new Account());
 
   //
@@ -399,16 +407,16 @@ class Mastodon {
   /// (for example: 'data:image/png;base64,iVBORw0KGgoAAAA[...]')
 
   dynamic updateAccount(
-      {String display_name: '',
+      {String displayName: '',
         String note: '',
         String avatar: '',
         String header: ''}) async =>
-      _DSON.map(
-          await _api_request(
+      _dson.map(
+          await _apiRequest(
               'POST',
               '/api/v1/accounts/update_credentials',
               _makeParamMap({
-                'display_name': display_name,
+                'display_name': displayName,
                 'note': note,
                 'avatar': avatar,
                 'header': header
@@ -420,14 +428,14 @@ class Mastodon {
   //
 
   /// Get information about this server.
-  dynamic getInstance() async => await _api_request('GET', '/api/v1/instance/');
+  dynamic getInstance() async => await _apiRequest('GET', '/api/v1/instance/');
 
   /// Fetch statuses, most recent ones first. Timeline can be home, local, public,
   /// or tag/hashtag. See the following functions documentation for what those do.
   /// The default timeline is the "home" timeline.
   /// Returns a list of toot dicts.
   dynamic getTimeline(TimelineRequest request, [int id]) async {
-    Map<String, String> map = _makeParamMap(request);
+    final Map<String, String> map = _makeParamMap(request);
 
     var tl = request.timeline;
     if (getTimeline == 'local') {
@@ -440,12 +448,12 @@ class Mastodon {
 
     var json;
     if (id == null) {
-      json = await _api_request('GET', '/api/v1/timelines/' + tl, map);
+      json = await _apiRequest('GET', '/api/v1/timelines/' + tl, map);
     } else {
-      json = await _api_request('GET', '/api/v1/accounts/$id/statuses', map);
+      json = await _apiRequest('GET', '/api/v1/accounts/$id/statuses', map);
     }
 
-    List<Status> list = _DSON.map(json, new Status(), true) as List<Status>;
+    final List<Status> list = _dson.map(json, new Status(), true);
 
     return list;
   }
@@ -455,41 +463,41 @@ class Mastodon {
   //
 
   /// Get details of the logged-in [Account].
-  dynamic verifyAccount() async => _DSON.map(
-      await _api_request('GET', '/api/v1/accounts/verify_credentials'),
+  dynamic verifyAccount() async => _dson.map(
+      await _apiRequest('GET', '/api/v1/accounts/verify_credentials'),
       new Account());
 
   /// Get list of [Account]s with some [Relationship] with this one.
-  dynamic getAccountRelationships() async => _DSON.map(
-      await _api_request('GET', '/api/v1/accounts/relationships'),
+  dynamic getAccountRelationships() async => _dson.map(
+      await _apiRequest('GET', '/api/v1/accounts/relationships'),
       new Account(),
       true);
 
   /// Get list of [Account]s muted by this one.
   dynamic getMutes() async =>
-      _DSON.map(await _api_request('GET', '/api/v1/mutes'), new Account(), true);
+      _dson.map(await _apiRequest('GET', '/api/v1/mutes'), new Account(), true);
 
   /// Get list of [Account]s blocked by this one.
-  dynamic getBlocks() async => _DSON.map(
-      await _api_request('GET', '/api/v1/blocks'), new Account(), true);
+  dynamic getBlocks() async => _dson.map(
+      await _apiRequest('GET', '/api/v1/blocks'), new Account(), true);
 
   /// Get list of [Account]s reported by this one.
-  dynamic getReports() async => _DSON.map(
-      await _api_request('GET', '/api/v1/reports'), new Account(), true);
+  dynamic getReports() async => _dson.map(
+      await _apiRequest('GET', '/api/v1/reports'), new Account(), true);
 
   /// Get list of [Status]es favourited by this one.
-  dynamic getFavourites() async => _DSON.map(
-      await _api_request('GET', '/api/v1/favourites'), new Status(), true);
+  dynamic getFavourites() async => _dson.map(
+      await _apiRequest('GET', '/api/v1/favourites'), new Status(), true);
 
   /// Get list of [Account]s requesting follows of this one.
-  dynamic getFollowRequests() async => _DSON.map(
-      await _api_request('GET', '/api/v1/follow_requests'),
+  dynamic getFollowRequests() async => _dson.map(
+      await _apiRequest('GET', '/api/v1/follow_requests'),
       new Account(),
       true);
 
   /// Get list of [Account]s this one follows.
-  dynamic getFollows() async => _DSON.map(
-      await _api_request('GET', '/api/v1/follows'), new Account(), true);
+  dynamic getFollows() async => _dson.map(
+      await _apiRequest('GET', '/api/v1/follows'), new Account(), true);
 
   //
   // Get information about a single Status.
@@ -497,33 +505,33 @@ class Mastodon {
 
   /// Get a single toot by id.
   dynamic getStatus(int id) async =>
-      _DSON.map(await _api_request('GET', '/api/v1/statuses/$id'), new Status());
+      _dson.map(await _apiRequest('GET', '/api/v1/statuses/$id'), new Status());
 
   /// Get a single status card by id.
-  dynamic getStatusCard(int id) async => _DSON.map(
-      await _api_request('GET', '/api/v1/statuses/$id/card'), new Status());
+  dynamic getStatusCard(int id) async => _dson.map(
+      await _apiRequest('GET', '/api/v1/statuses/$id/card'), new Status());
 
   /// Get ancestors and descendants of a single toot.
-  dynamic getStatusContext(int id) async => _DSON.map(
-      await _api_request('GET', '/api/v1/statuses/$id/context'),
+  dynamic getStatusContext(int id) async => _dson.map(
+      await _apiRequest('GET', '/api/v1/statuses/$id/context'),
       new Status(),
       true);
 
   /// Get list of users who have boosted this.
-  dynamic getStatusRebloggedBy(int id) async => _DSON.map(
-      await _api_request('GET', '/api/v1/statuses/$id/reblogged_by'),
+  dynamic getStatusRebloggedBy(int id) async => _dson.map(
+      await _apiRequest('GET', '/api/v1/statuses/$id/reblogged_by'),
       new Account(),
       true);
 
   /// Get list of users who have favourited this.
-  dynamic getStatusFavouritedBy(int id) async => _DSON.map(
-      await _api_request('GET', '/api/v1/statuses/$id/favourited_by'),
+  dynamic getStatusFavouritedBy(int id) async => _dson.map(
+      await _apiRequest('GET', '/api/v1/statuses/$id/favourited_by'),
       new Account(),
       true);
 
   /// Get list of notifications (= mentions, favourites, reblogs, follows).
-  dynamic getNotifications([String id = '']) async => _DSON.map(
-      await _api_request('GET', '/api/v1/notifications/$id'),
+  dynamic getNotifications([String id = '']) async => _dson.map(
+      await _apiRequest('GET', '/api/v1/notifications/$id'),
       new Notification(),
       true);
 
@@ -532,8 +540,8 @@ class Mastodon {
   //
 
   /// Get information about another account. Returns an [Account].
-  dynamic getAccount(int id) async => _DSON.map(
-      await _api_request('GET', '/api/v1/accounts/$id'), new Account());
+  dynamic getAccount(int id) async => _dson.map(
+      await _apiRequest('GET', '/api/v1/accounts/$id'), new Account());
 
   /// Get statuses posted by another account. Returns list of [Status].
   dynamic getAccountStatuses(int id,
@@ -541,20 +549,20 @@ class Mastodon {
       getTimeline(request != null ? request : new TimelineRequest(), id);
 
   /// Get accounts followed by this one. Returns list of [Account].
-  dynamic getAccountFollowing(int id) async => _DSON.map(
-      await _api_request('GET', '/api/v1/accounts/$id/following'),
+  dynamic getAccountFollowing(int id) async => _dson.map(
+      await _apiRequest('GET', '/api/v1/accounts/$id/following'),
       new Account(),
       true);
 
   /// Get followers of this account. Returns list of [Account].
-  dynamic getAccountFollowers(int id) async => _DSON.map(
-      await _api_request('GET', '/api/v1/accounts/$id/followers'),
+  dynamic getAccountFollowers(int id) async => _dson.map(
+      await _apiRequest('GET', '/api/v1/accounts/$id/followers'),
       new Account(),
       true);
 
   /// Find accounts matching query. Returns list of [Account].
-  dynamic findAccounts(String query, {int limit: null}) async => _DSON.map(
-      await _api_request('GET', '/api/v1/accounts/search',
+  dynamic findAccounts(String query, {int limit: null}) async => _dson.map(
+      await _apiRequest('GET', '/api/v1/accounts/search',
           _makeParamMap({'q': query, 'limit': limit})),
       new Account(),
       true);
@@ -563,10 +571,10 @@ class Mastodon {
   /// Will search federated instances if resolve is True.
   /// Returns a map holding [Account]s, [Status]es, and (String) hashtags.
   dynamic find(String query, {bool resolve: false}) async {
-    var map = await _api_request('GET', '/api/v1/search',
+    final map = await _apiRequest('GET', '/api/v1/search',
         _makeParamMap({'q': query, 'resolve': resolve}));
-    map['accounts'] = _DSON.map(map['accounts'], new Account(), true);
-    map['statuses'] = _DSON.map(map['statuses'], new Status(), true);
+    map['accounts'] = _dson.map(map['accounts'], new Account(), true);
+    map['statuses'] = _dson.map(map['statuses'], new Status(), true);
     //map['hashtags'] = DSON.map(map['hashtags'], new Account(), true);
     return map;
   }
@@ -574,10 +582,12 @@ class Mastodon {
 
 /// Capture some obvious misuses.
 class MastodonIllegalArgumentError extends ArgumentError {
+  /// Pass straight to super.
   MastodonIllegalArgumentError(message): super(message);
 }
 
 /// Capture some obvious errors.
 class MastodonAPIError extends UnsupportedError {
+  /// Pass straight to super.
   MastodonAPIError(String message): super(message);
 }
