@@ -4,20 +4,17 @@
 import 'dart:io';
 import 'dart:convert';
 
-
 import 'package:mastodon/mastodon.dart';
 import 'package:test/test.dart';
-
 
 void main() {
   group('General read-only tests', () {
     Mastodon m;
     var properties;
 
-    setUp(() {
+    setUpAll(() {
       // See 'lib/example_config.json' for structure.
       properties = JSON.decode(new File('lib/config.json').readAsStringSync());
-
       m = new Mastodon.usingAccessToken(properties['access_token']);
     });
 
@@ -39,10 +36,38 @@ void main() {
     });
   });
 
+  group('Timeline', () {
+    var properties;
+    Mastodon m;
+    TimelineRequest tl;
+
+    setUpAll(() {
+      // See 'lib/example_config.json' for structure.
+      properties = JSON.decode(new File('lib/config.json').readAsStringSync());
+      m = new Mastodon.usingAccessToken(properties['access_token']);
+    });
+
+    setUp(() {
+      tl = new TimelineRequest();
+    });
+
+    test('Get timeline by hashtag', () async {
+      tl.hashtag = 'boingboing';
+      expect(await m.getTimeline(tl), isNotEmpty,
+          reason: 'Could not get my timeline by hashtag.');
+    });
+
+    test('Get limited timeline', () async {
+      tl.limit = 3;
+      expect(await m.getTimeline(tl), hasLength(3),
+          reason: 'Limited timeline search failed.');
+    });
+  });
+
   group('Logon', () {
     var properties;
 
-    setUp(() {
+    setUpAll(() {
       // See 'lib/example_config.json' for structure.
       properties = JSON.decode(new File('lib/config.json').readAsStringSync());
     });
@@ -50,9 +75,9 @@ void main() {
     test('Confirm instance okay', () async {
       Mastodon m = new Mastodon();
 
-      expect(await m.getInstance(), isNotEmpty, reason: 'No access to instance.');
+      expect(await m.getInstance(), isNotEmpty,
+          reason: 'No access to instance.');
     });
-
 
     test('Not logged on', () async {
       Mastodon m = new Mastodon();
@@ -64,16 +89,20 @@ void main() {
 
     test('Password logon', () async {
       Mastodon m = new Mastodon();
+      expectLater(m.log_in(properties['username'], 'verywrongpassword'),
+          throwsArgumentError,
+          reason: 'Incorrect password did not raise error.');
       await m.log_in(properties['username'], properties['password']);
-      expect(await m.verifyAccount(), isNotNull, reason: 'Password logon failed.');
+      expect(m.access_token, isNotEmpty,
+          reason: 'OAuth access token not saved');
+      expect(await m.verifyAccount(), isNotNull,
+          reason: 'Password logon failed.');
     });
 
     test('OAuth logon', () async {
       Mastodon m = new Mastodon.usingAccessToken(properties['access_token']);
-      expect(await m.verifyAccount(), isNotNull, reason: 'Access token logon failed.');
+      expect(await m.verifyAccount(), isNotNull,
+          reason: 'Access token logon failed.');
     });
-
-
   });
 }
-

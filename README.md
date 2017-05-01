@@ -21,3 +21,7 @@ A simple usage example:
 Incomplete and not well tested, so it is full of them.
 
 Fix them at https://github.com/mykdavies/Mastodon!
+
+## Todo
+
+- Rate limiting mechanism not implemented. 
