@@ -2,7 +2,7 @@ name: mastodon
 description: A starting point for Mastodon access.
 version: 0.0.1
 homepage: https://github.com/mykdavies/Mastodon
-author: mike <mykdavies@gmail.com>
+author: Michael Davies <mykdavies@gmail.com>
 
 environment:
   sdk: '>=1.20.1 <2.0.0'

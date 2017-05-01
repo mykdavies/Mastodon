@@ -350,10 +350,10 @@ class Mastodon {
   /// (for example: 'data:image/png;base64,iVBORw0KGgoAAAA[...]')
 
   dynamic updateAccount(
-      {String display_name = '',
-        String note = '',
-        String avatar = '',
-        String header = ''}) async =>
+      {String display_name: '',
+        String note: '',
+        String avatar: '',
+        String header: ''}) async =>
       DSON.map(
           await _api_request(
               'POST',
