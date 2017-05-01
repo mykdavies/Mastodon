@@ -8,7 +8,7 @@ library mastodon;
 
 export 'src/mastodon_base.dart';
 
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'package:mime/mime.dart';
@@ -177,7 +177,7 @@ class Mastodon {
     var pp = makeParamMap(params);
 
     var request_complete = false;
-    http.StreamedResponse response_object;
+    StreamedResponse response_object;
 
     while (!request_complete) {
       // This will be reset later if we are running into throttling issues.
@@ -187,9 +187,9 @@ class Mastodon {
       var request;
 
       if (files.isEmpty) {
-        request = new http.Request(method, uri);
+        request = new Request(method, uri);
       } else {
-        request = new http.MultipartRequest(method, uri);
+        request = new MultipartRequest(method, uri);
         for (var f in files.keys) {
           await request.files.add(files[f]);
         }
@@ -386,7 +386,7 @@ class Mastodon {
         orElse: () => '');
 
     var name = 'mastodondartupload${date}_$random_suffix.$ext';
-    var mpf = new http.MultipartFile.fromBytes('file', media,
+    var mpf = new MultipartFile.fromBytes('file', media,
         filename: name, contentType: new MediaType.parse(mime_type));
     return DSON.map(
         await _api_request('POST', '/api/v1/media', {}, {'file': mpf}),
