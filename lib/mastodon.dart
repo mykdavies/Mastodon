@@ -4,15 +4,15 @@
 /// Support for doing something awesome.
 ///
 /// More dartdocs go here.
-library Mastodon;
+library mastodon;
 
-export 'src/Mastodon_base.dart';
+export 'src/mastodon_base.dart';
 
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'dart:io';
 import 'package:mime/mime.dart';
-import 'package:http_parser/http_parser.dart';
+import 'package:http_parser/src/media_type.dart';
 // Needed in order to guess extension given mime-type.
 import 'package:mime/src/default_extension_map.dart';
 import 'dart:math';
@@ -20,7 +20,7 @@ import 'dart:math';
 import 'package:dartson/dartson.dart';
 import 'package:dartson/transformers/date_time.dart';
 
-import 'src/Mastodon_base.dart';
+import 'src/mastodon_base.dart';
 
 
 /// Simple API to allow access to a Mastodon server.

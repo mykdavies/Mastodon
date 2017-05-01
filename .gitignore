@@ -2,12 +2,18 @@
 .packages
 .pub/
 build/
+
 # Remove the following pattern if you wish to check in your lock file
 pubspec.lock
 
 # Directory created by dartdoc
-doc/api/
+doc/
 
 #ignore secrets
 lib/config.json
 lib/orig_config.json
+
+# IDEA generated
+.idea
+Mastodon.iml
+

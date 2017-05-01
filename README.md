@@ -9,7 +9,8 @@ A simple usage example:
     import 'package:Mastodon/Mastodon.dart';
 
     main() {
-      var m = new Mastodon.usingAccessToken(properties['access_token']);
+      // Using mastodon.cloud by default.
+      var m = new Mastodon.usingAccessToken('an OAuth access token for this instance');
       for (Account a in m.findAccounts('myk*')) {
         print(a);
       }
