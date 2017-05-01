@@ -1,0 +1,20 @@
+name: Mastodon
+description: A starting point for Mastodon access.
+version: 0.0.1
+#homepage: https://www.example.com
+#author: mike <mykdavies@gmail.com>
+
+environment:
+  sdk: '>=1.20.1 <2.0.0'
+
+dependencies:
+  dart_feed: "^0.0.4"
+  oauth2: ^1.0.2
+  dartson: ^0.2.0
+  mime: ^0.9.2
+
+dev_dependencies:
+  test: ^0.12.0
+
+transformers:
+- dartson
