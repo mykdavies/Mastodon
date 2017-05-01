@@ -6,10 +6,10 @@ A simple API for accessing Mastodon instances.
 
 A simple usage example:
 
-    import 'package:Mastodon/Mastodon.dart';
+    import 'package:mastodon/mastodon.dart';
 
     main() {
-      // Using mastodon.cloud by default.
+      // Using mastodon.cloud instance by default.
       var m = new Mastodon.usingAccessToken('an OAuth access token for this instance');
       for (Account a in m.findAccounts('myk*')) {
         print(a);

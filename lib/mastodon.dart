@@ -422,7 +422,7 @@ class Mastodon {
   /// or tag/hashtag. See the following functions documentation for what those do.
   /// The default timeline is the "home" timeline.
   /// Returns a list of toot dicts.
-  dynamic timeline(TimelineRequest request, [String id = '']) async {
+  dynamic timeline(TimelineRequest request, [int id]) async {
     Map<String, String> map = makeParamMap(request);
 
     var tl = request.timeline;
@@ -435,7 +435,7 @@ class Mastodon {
     map.remove('hashtag'); // The code above handles hashtags.
 
     var json;
-    if (id.isEmpty) {
+    if (id == null) {
       json = await _api_request('GET', '/api/v1/timelines/' + tl, map);
     } else {
       json = await _api_request('GET', '/api/v1/accounts/$id/statuses', map);
@@ -449,6 +449,10 @@ class Mastodon {
   //
   // Get information for this account.
   //
+
+  dynamic verifyAccount() async => DSON.map(
+      await _api_request('GET', '/api/v1/accounts/verify_credentials'),
+      new Account());
 
   dynamic getAccountRelationships() async => DSON.map(
       await _api_request('GET', '/api/v1/accounts/relationships'),
@@ -515,23 +519,19 @@ class Mastodon {
   // Get information about other accounts.
   //
 
-  dynamic getAccount([String id = '']) async => DSON.map(
+  dynamic getAccount(int id) async => DSON.map(
       await _api_request('GET', '/api/v1/accounts/$id'), new Account());
 
-  dynamic verifyAccount() async => DSON.map(
-      await _api_request('GET', '/api/v1/accounts/verify_credentials'),
-      new Account());
-
-  dynamic getAccountStatuses(String id,
+  dynamic getAccountStatuses(int id,
       [TimelineRequest request = null]) async =>
       timeline(request != null ? request : new TimelineRequest(), id);
 
-  dynamic getAccountFollowing([String id = '']) async => DSON.map(
+  dynamic getAccountFollowing(int id) async => DSON.map(
       await _api_request('GET', '/api/v1/accounts/$id/following'),
       new Account(),
       true);
 
-  dynamic getAccountFollowers([String id = '']) async => DSON.map(
+  dynamic getAccountFollowers(int id) async => DSON.map(
       await _api_request('GET', '/api/v1/accounts/$id/followers'),
       new Account(),
       true);
@@ -554,14 +554,11 @@ class Mastodon {
   }
 }
 
-class MastodonIllegalArgumentError {
-  MastodonIllegalArgumentError(String err) {
-    throw new ArgumentError(err);
-  }
+class MastodonIllegalArgumentError extends ArgumentError {
+  final message;
+  MastodonIllegalArgumentError(this.message): super(message);
 }
 
-class MastodonAPIError {
-  MastodonAPIError(String err) {
-    throw new UnsupportedError(err);
-  }
+class MastodonAPIError extends UnsupportedError {
+  MastodonAPIError(String message): super(message);
 }
