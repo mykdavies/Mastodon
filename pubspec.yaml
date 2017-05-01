@@ -1,6 +1,6 @@
 name: mastodon
 description: A starting point for Mastodon access.
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/mykdavies/Mastodon
 author: Michael Davies <mykdavies@gmail.com>
 

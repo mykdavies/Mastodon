@@ -8,6 +8,6 @@
 
 - Updated to allow dartdocs to parse.
 
-## 0.0.3 UNPUBLISHED
+## 0.0.3
 
-- Improved error handling, better testing.
+- Improved error handling, better testing. Some more documentation.

@@ -15,6 +15,8 @@ A simple usage example:
         print(a);
       }
     }
+    
+See `mastodon_test.dart` for more examples.
 
 ## Features and bugs
 

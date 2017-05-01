@@ -1,11 +1,16 @@
-// Copyright (c) 2017, mike. All rights reserved. Use of this source code
+// Copyright (c) 2017, Michael Davies. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
 
-// TODO: Put public facing types in this file.
-
+///
+/// Key classes that encapsulate information for sharing with
+/// the Mastodon server.
+///
+/// See https://github.com/tootsuite/documentation/blob/master/Using-the-API/API.md for more information.
+///
 
 import 'package:dartson/dartson.dart';
 
+/// User account.
 @Entity()
 class Account {
   int id;
@@ -24,9 +29,11 @@ class Account {
   String header;
   String header_static;
 
-  String toString() => "$username ${display_name.isNotEmpty ? '(' + display_name + ')' : ''}";
+  String toString() =>
+      "$username ${display_name.isNotEmpty ? '(' + display_name + ')' : ''}";
 }
 
+/// A posted update.
 @Entity()
 class Status {
   int id;
@@ -52,6 +59,7 @@ class Status {
   String toString() => "$id: $account at $created_at-->$content";
 }
 
+/// A helper class to create a new status for posting.
 @Entity()
 class Post {
   Post();
@@ -68,6 +76,7 @@ class Post {
   String spoiler_text;
 }
 
+/// A notification.
 @Entity()
 class Notification {
   int id;
@@ -76,10 +85,11 @@ class Notification {
   Account account;
   Status status;
 
-  String toString() => "$id ($type) ${status != null ? status : ''} ${account != null ? account : ''}";
-
+  String toString() =>
+      "$id ($type) ${status != null ? status : ''} ${account != null ? account : ''}";
 }
 
+/// A helper class for creating new `getTimeline` requests.
 @Entity()
 class TimelineRequest {
   String timeline = 'home';
@@ -89,6 +99,7 @@ class TimelineRequest {
   int limit;
 }
 
+/// A relationship.
 @Entity()
 class Relationship {
   int id;
@@ -99,12 +110,14 @@ class Relationship {
   bool requested = false;
 }
 
+/// Admin's response to a report of another user.
 @Entity()
 class Report {
   int id;
-  String action_taken='';
+  String action_taken = '';
 }
 
+/// An attachment.
 @Entity()
 class Attachment {
   int id;
