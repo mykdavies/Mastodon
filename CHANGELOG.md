@@ -11,3 +11,7 @@
 ## 0.0.3
 
 - Improved error handling, better testing. Some more documentation.
+
+## 0.0.4
+
+- dartdocs is a harsh code critic :-(.

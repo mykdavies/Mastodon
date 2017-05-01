@@ -574,8 +574,7 @@ class Mastodon {
 
 /// Capture some obvious misuses.
 class MastodonIllegalArgumentError extends ArgumentError {
-  final message;
-  MastodonIllegalArgumentError(this.message): super(message);
+  MastodonIllegalArgumentError(message): super(message);
 }
 
 /// Capture some obvious errors.
