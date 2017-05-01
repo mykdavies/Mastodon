@@ -18,4 +18,6 @@ A simple usage example:
 
 ## Features and bugs
 
-Please let me know about bugs at mykdavies@gmail.com, or fix them at github!
+Incomplete and not well tested, so it is full of them.
+
+Fix them at https://github.com/mykdavies/Mastodon!
