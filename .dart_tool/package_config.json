@@ -236,12 +236,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "mime_type",
-      "rootUri": "file:///Users/michael/.pub-cache/hosted/pub.dartlang.org/mime_type-1.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "node_preamble",
       "rootUri": "file:///Users/michael/.pub-cache/hosted/pub.dartlang.org/node_preamble-2.0.1",
       "packageUri": "lib/",
@@ -434,7 +428,7 @@
       "languageVersion": "2.12"
     }
   ],
-  "generated": "2022-04-16T18:20:17.408588Z",
+  "generated": "2022-04-16T18:31:06.543324Z",
   "generator": "pub",
   "generatorVersion": "2.17.0-182.2.beta"
 }
