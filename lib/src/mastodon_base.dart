@@ -8,122 +8,158 @@
 /// See https://github.com/tootsuite/documentation/blob/master/Using-the-API/API.md for more information.
 ///
 
-import 'package:dartson/dartson.dart';
+//TODO: fix these!
+// ignore_for_file: public_member_api_docs, non_constant_identifier_names, type_annotate_public_apis
+
+import 'package:freezed_annotation/freezed_annotation.dart';
+
+// 2. add 'part' files
+part 'mastodon_base.freezed.dart';
+part 'mastodon_base.g.dart';
 
 /// User account.
-@Entity()
-class Account {
-  int id;
-  String username;
-  String acct;
-  String display_name;
-  bool locked;
-  DateTime created_at;
-  int followers_count;
-  int following_count;
-  int statuses_count;
-  String note;
-  String url;
-  String avatar;
-  String avatar_static;
-  String header;
-  String header_static;
-
-  String toString() =>
-      "$username ${display_name.isNotEmpty ? '(' + display_name + ')' : ''}";
+@freezed
+class Account with _$Account {
+  factory Account({
+    required String id,
+    required String username,
+    required String acct,
+    required String display_name,
+    required bool locked,
+    required DateTime created_at,
+    required int followers_count,
+    required int following_count,
+    required int statuses_count,
+    required String note,
+    required String url,
+    required String avatar,
+    required String avatar_static,
+    required String header,
+    required String header_static,
+  }) = _Account;
+  factory Account.fromJson(Map<String, dynamic> json) =>
+      _$AccountFromJson(json);
+  // @override
+  // String toString() =>
+  //     "$username ${displayName.isNotEmpty ? '($displayName)' : ''}";
 }
 
 /// A posted update.
-@Entity()
-class Status {
-  int id;
-  DateTime created_at;
-  int in_reply_to_id;
-  int in_reply_to_account_id;
-  bool sensitive;
-  String spoiler_text;
-  String visibility;
-  Map application;
-  Account account;
-  List mentions;
-  List tags;
-  String uri;
-  String content;
-  String url;
-  int reblogs_count;
-  int favourites_count;
-  var reblog;
-  var favourited;
-  var reblogged;
+@freezed
+class Status with _$Status {
+  factory Status({
+    required String id,
+    required DateTime created_at,
+    @Default(null) String? in_reply_to_id,
+    @Default(null) String? in_reply_to_account_id,
+    required bool sensitive,
+    required String spoiler_text,
+    @Default(null) String? visibility,
+    @Default(null) Map<String, dynamic>? application,
+    required Account account,
+    required List mentions,
+    required List tags,
+    required String uri,
+    required String content,
+    @Default(null) String? url,
+    required int reblogs_count,
+    required int favourites_count,
+    @Default(null) Status? reblog,
+    required bool favourited,
+    required bool reblogged,
+  }) = _Status;
 
-  String toString() => "$id: $account at $created_at-->$content";
+  factory Status.fromJson(Map<String, dynamic> json) => _$StatusFromJson(json);
+  // @override
+  // String toString() => "$id: $account at $created_at-->$content";
 }
 
 /// A helper class to create a new status for posting.
-@Entity()
-class Post {
-  Post();
-  factory Post.withText(String text) {
-    var p = new Post();
-    p.status = text;
-    return p;
-  }
-  String status;
-  int in_reply_to_id;
-  List media_ids;
-  bool sensitivity = false;
-  String visibility;
-  String spoiler_text;
+@freezed
+class Post with _$Post {
+  factory Post({
+    required String status,
+    @Default(null) int? in_reply_to_id,
+    @Default(null) List? media_ids,
+    @Default(false) bool? sensitivity,
+    @Default('public') String? visibility,
+    @Default(null) String? spoiler_text,
+  }) = _Post;
+  factory Post.withText(String text) => Post(
+        status: text,
+      );
+
+  factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
 }
 
 /// A notification.
-@Entity()
-class Notification {
-  int id;
-  String type;
-  DateTime created_at;
-  Account account;
-  Status status;
+@freezed
+class Notification with _$Notification {
+  factory Notification({
+    required int id,
+    required String type,
+    required DateTime created_at,
+    required Account account,
+    required Status status,
+  }) = _Notification;
 
-  String toString() =>
-      "$id ($type) ${status != null ? status : ''} ${account != null ? account : ''}";
+  factory Notification.fromJson(Map<String, dynamic> json) =>
+      _$NotificationFromJson(json);
+  // @override
+  // String toString() =>
+  //     "$id ($type) ${status != null ? status : ''} ${account != null ? account : ''}";
 }
 
 /// A helper class for creating new `getTimeline` requests.
-@Entity()
-class TimelineRequest {
-  String timeline = 'home';
-  String hashtag = '';
-  int max_id;
-  DateTime since_id;
-  int limit;
+@freezed
+class TimelineRequest with _$TimelineRequest {
+  factory TimelineRequest({
+    String? timeline,
+    String? hashtag,
+    int? max_id,
+    DateTime? since_id,
+    int? limit,
+  }) = _TimelineRequest;
+  factory TimelineRequest.fromJson(Map<String, dynamic> json) =>
+      _$TimelineRequestFromJson(json);
 }
 
 /// A relationship.
-@Entity()
-class Relationship {
-  int id;
-  bool following = false;
-  bool followed_by = false;
-  bool blocking = false;
-  bool muting = false;
-  bool requested = false;
+@freezed
+class Relationship with _$Relationship {
+  factory Relationship({
+    required int id,
+    required bool following,
+    required bool followed_by,
+    required bool blocking,
+    required bool muting,
+    required bool requested,
+  }) = _Relationship;
+  factory Relationship.fromJson(Map<String, dynamic> json) =>
+      _$RelationshipFromJson(json);
 }
 
 /// Admin's response to a report of another user.
-@Entity()
-class Report {
-  int id;
-  String action_taken = '';
+@freezed
+class Report with _$Report {
+  factory Report({
+    required int id,
+    required String action_taken,
+  }) = _Report;
+  factory Report.fromJson(Map<String, dynamic> json) => _$ReportFromJson(json);
 }
 
 /// An attachment.
-@Entity()
-class Attachment {
-  int id;
-  String type;
-  String url;
-  String remote_url;
-  String preview_url;
-  String text_url;
+@freezed
+class Attachment with _$Attachment {
+  factory Attachment({
+    required int id,
+    required String type,
+    required String url,
+    required String remote_url,
+    required String preview_url,
+    required String text_url,
+  }) = _Attachment;
+  factory Attachment.fromJson(Map<String, dynamic> json) =>
+      _$AttachmentFromJson(json);
 }

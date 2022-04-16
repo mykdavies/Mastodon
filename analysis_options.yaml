@@ -1,7 +1,7 @@
 analyzer:
-  strong-mode: true
-#   exclude:
-#     - path/to/excluded/files/**
+  exclude:
+    - '**/*.g.dart'
+    - '**/*.freezed.dart'
 
 # Lint rules and documentation, see http://dart-lang.github.io/linter/lints
 linter:
@@ -18,7 +18,6 @@ linter:
     - always_declare_return_types
 #    - always_specify_types
     - annotate_overrides
-    - avoid_as
     - avoid_empty_else
     - avoid_function_literals_in_foreach_calls
     - avoid_init_to_null
@@ -26,9 +25,7 @@ linter:
     - avoid_slow_async_io
     - await_only_futures
     - camel_case_types
-    - cancel_subscriptions
     - cascade_invocations
-    - close_sinks
     - comment_references
     - constant_identifier_names
     - control_flow_in_finally
@@ -36,13 +33,10 @@ linter:
     - empty_catches
     - empty_constructor_bodies
     - empty_statements
-    - hash_and_equals
     - implementation_imports
     - invariant_booleans
-    - iterable_contains_unrelated_type
     - library_names
     - library_prefixes
-    - list_remove_unrelated_type
     - literal_only_boolean_expressions
     - no_adjacent_strings_in_list
     - no_duplicate_case_values
@@ -72,8 +66,6 @@ linter:
     - slash_for_doc_comments
     - sort_constructors_first
     - sort_unnamed_constructors_first
-    - super_goes_last
-    - test_types_in_equals
     - throw_in_finally
     - type_annotate_public_apis
     - type_init_formals
@@ -84,5 +76,3 @@ linter:
     - unnecessary_null_aware_assignments
     - unnecessary_null_in_if_null_operators
     - unnecessary_this
-    - unrelated_type_equality_checks
-    - valid_regexps

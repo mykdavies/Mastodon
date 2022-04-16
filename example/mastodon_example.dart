@@ -3,7 +3,7 @@
 
 import 'package:mastodon/mastodon.dart';
 
-main() {
-  final Mastodon m = new Mastodon();
+void main() {
+  final m = new Mastodon();
   print(m.getInstance());
 }
