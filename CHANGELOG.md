@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.0
+
+- Updated to support Dart 2 and null-safety. 
+
 ## 0.1.0
 
 - Massive tidy-up with (nearly) every lint rule turned on.

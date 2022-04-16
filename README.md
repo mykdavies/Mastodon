@@ -11,7 +11,7 @@ A simple usage example:
     main() {
       // Using mastodon.cloud instance by default.
       var m = new Mastodon.usingAccessToken('an OAuth access token for this instance');
-      for (Account a in m.findAccounts('myk*')) {
+      for (Account a in m.findAccounts('myk')) {
         print(a);
       }
     }
