@@ -9,7 +9,7 @@
 ///
 
 //TODO: fix these!
-// ignore_for_file: public_member_api_docs, non_constant_identifier_names, type_annotate_public_apis
+// ignore_for_file: non_constant_identifier_names
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -20,6 +20,7 @@ part 'mastodon_base.g.dart';
 /// User account.
 @freezed
 class Account with _$Account {
+  /// Create a new Account. You probably want to use .fromJson() instead.
   factory Account({
     required String id,
     required String username,
@@ -37,6 +38,8 @@ class Account with _$Account {
     required String header,
     required String header_static,
   }) = _Account;
+
+  /// Construct an Account object from a JSON structure.
   factory Account.fromJson(Map<String, dynamic> json) =>
       _$AccountFromJson(json);
   // @override
@@ -47,6 +50,7 @@ class Account with _$Account {
 /// A posted update.
 @freezed
 class Status with _$Status {
+  /// Create a new Status. You probably want to use .fromJson() instead.
   factory Status({
     required String id,
     required DateTime created_at,
@@ -57,8 +61,8 @@ class Status with _$Status {
     @Default(null) String? visibility,
     @Default(null) Map<String, dynamic>? application,
     required Account account,
-    required List mentions,
-    required List tags,
+    required List<Mention> mentions,
+    required List<Tag> tags,
     required String uri,
     required String content,
     @Default(null) String? url,
@@ -67,8 +71,12 @@ class Status with _$Status {
     @Default(null) Status? reblog,
     required bool favourited,
     required bool reblogged,
+    @Default(null) List<String>? media_ids,
+    @Default(null) List<Attachment>? media_attachments,
+    @Default(null) String? text,
   }) = _Status;
 
+  /// Construct a Status object from a JSON structure.
   factory Status.fromJson(Map<String, dynamic> json) => _$StatusFromJson(json);
   // @override
   // String toString() => "$id: $account at $created_at-->$content";
@@ -77,42 +85,46 @@ class Status with _$Status {
 /// A helper class to create a new status for posting.
 @freezed
 class Post with _$Post {
+  /// Create a new Post. You may want to use .fromJson() instead.
   factory Post({
     required String status,
-    @Default(null) int? in_reply_to_id,
-    @Default(null) List? media_ids,
-    @Default(false) bool? sensitivity,
-    @Default('public') String? visibility,
+    @Default(null) String? in_reply_to_id,
+    @Default(null) List<String>? media_ids,
+    @Default(null) bool? sensitivity,
+    @Default(null) String? visibility,
     @Default(null) String? spoiler_text,
   }) = _Post;
+
+  /// Construct a default Post object with just the status message.
   factory Post.withText(String text) => Post(
         status: text,
       );
 
+  /// Construct a Post object from a JSON structure.
   factory Post.fromJson(Map<String, dynamic> json) => _$PostFromJson(json);
 }
 
 /// A notification.
 @freezed
 class Notification with _$Notification {
+  /// Create a new Notification. You probably want to use .fromJson() instead.
   factory Notification({
-    required int id,
+    required String id,
     required String type,
     required DateTime created_at,
     required Account account,
     required Status status,
   }) = _Notification;
 
+  /// Construct a Notification object from a JSON structure.
   factory Notification.fromJson(Map<String, dynamic> json) =>
       _$NotificationFromJson(json);
-  // @override
-  // String toString() =>
-  //     "$id ($type) ${status != null ? status : ''} ${account != null ? account : ''}";
 }
 
 /// A helper class for creating new `getTimeline` requests.
 @freezed
 class TimelineRequest with _$TimelineRequest {
+  /// Create a new TimelineRequest. You may want to use .fromJson() instead.
   factory TimelineRequest({
     String? timeline,
     String? hashtag,
@@ -120,6 +132,8 @@ class TimelineRequest with _$TimelineRequest {
     DateTime? since_id,
     int? limit,
   }) = _TimelineRequest;
+
+  /// Construct a TimelineRequest object from a JSON structure.
   factory TimelineRequest.fromJson(Map<String, dynamic> json) =>
       _$TimelineRequestFromJson(json);
 }
@@ -127,14 +141,17 @@ class TimelineRequest with _$TimelineRequest {
 /// A relationship.
 @freezed
 class Relationship with _$Relationship {
+  /// Create a new Relationship. You probably want to use .fromJson() instead.
   factory Relationship({
-    required int id,
+    required String id,
     required bool following,
     required bool followed_by,
     required bool blocking,
     required bool muting,
     required bool requested,
   }) = _Relationship;
+
+  /// Construct a Relationship object from a JSON structure.
   factory Relationship.fromJson(Map<String, dynamic> json) =>
       _$RelationshipFromJson(json);
 }
@@ -142,24 +159,59 @@ class Relationship with _$Relationship {
 /// Admin's response to a report of another user.
 @freezed
 class Report with _$Report {
+  /// Create a new Report. You probably want to use .fromJson() instead.
   factory Report({
-    required int id,
+    required String id,
     required String action_taken,
   }) = _Report;
+
+  /// Construct a Report object from a JSON structure.
   factory Report.fromJson(Map<String, dynamic> json) => _$ReportFromJson(json);
 }
 
 /// An attachment.
 @freezed
 class Attachment with _$Attachment {
+  /// Create a new Attachment. You probably want to use .fromJson() instead.
   factory Attachment({
-    required int id,
+    required String id,
     required String type,
     required String url,
-    required String remote_url,
+    @Default(null) String? remote_url,
     required String preview_url,
     required String text_url,
   }) = _Attachment;
+
+  /// Construct an Attachmet object from a JSON structure.
   factory Attachment.fromJson(Map<String, dynamic> json) =>
       _$AttachmentFromJson(json);
+}
+
+/// A tag.
+@freezed
+class Tag with _$Tag {
+  /// Create a new tag. You probably want to use .fromJson() instead.
+  factory Tag({
+    required String name,
+    required String url,
+  }) = _Tag;
+
+  /// Construct an Attachmet object from a JSON structure.
+  factory Tag.fromJson(Map<String, dynamic> json) => _$TagFromJson(json);
+}
+
+/// A mention.
+@freezed
+class Mention with _$Mention {
+  /// Create a new tag. You probably want to use .fromJson() instead.
+  factory Mention({
+    required String id,
+    required String username,
+    required String acct,
+    required String url,
+  }) = _Mention;
+
+  /// Construct an Attachmet object from a JSON structure.
+  factory Mention.fromJson(Map<String, dynamic> json) =>
+      _$MentionFromJson(json);
 }

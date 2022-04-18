@@ -1,6 +1,6 @@
 // Copyright (c) 2017, mike. All rights reserved. Use of this source code
 // is governed by a BSD-style license that can be found in the LICENSE file.
-@Timeout(Duration(seconds: 100))
+@Timeout(Duration(seconds: 900))
 
 import 'dart:convert';
 
@@ -17,7 +17,10 @@ void main() {
     setUpAll(() {
       // See 'lib/example_config.json' for structure.
       properties = jsonDecode(new File('lib/config.json').readAsStringSync());
-      m = new Mastodon.usingAccessToken(properties['access_token']);
+      m = new Mastodon.usingAccessToken(
+        properties['access_token'],
+        instance: properties['instance'],
+      );
     });
 
     test('General account-related accesses', () {
@@ -46,7 +49,10 @@ void main() {
     setUpAll(() {
       // See 'lib/example_config.json' for structure.
       properties = jsonDecode(new File('lib/config.json').readAsStringSync());
-      m = Mastodon.usingAccessToken(properties['access_token']);
+      m = Mastodon.usingAccessToken(
+        properties['access_token'],
+        instance: properties['instance'],
+      );
     });
 
     setUp(() {
@@ -106,30 +112,44 @@ void main() {
     });
 
     test('OAuth logon', () async {
-      final m = new Mastodon.usingAccessToken(properties['access_token'])
-        ..debug = true;
-      print(m);
+      final m = new Mastodon.usingAccessToken(
+        properties['access_token'],
+        instance: properties['instance'],
+      );
       expect(await m.verifyAccount(), isNotNull,
           reason: 'Access token logon failed.');
     });
   });
   group('Posting', () {
     var properties;
+    late Mastodon m;
     setUpAll(() {
       // See 'lib/example_config.json' for structure.
       properties = jsonDecode(new File('lib/config.json').readAsStringSync());
+      m = new Mastodon.usingAccessToken(
+        properties['access_token'],
+        instance: properties['instance'],
+      );
     });
 
     test('Post and delete a status', () async {
-      final m = new Mastodon.usingAccessToken(properties['access_token']);
-      expect(await m.verifyAccount(), isNotNull,
-          reason: 'Access token logon failed.');
       final post = Post(status: 'test', visibility: 'private');
       final resp = await m.postStatus(post);
       final id = resp.id;
       final status = await m.getStatus(id);
       expect(id, status.id);
-      m.deleteStatus(id);
+      await m.deleteStatus(id);
+    });
+    test('Post and delete a status with attachment', () async {
+      final img = File('test/jackhammer.png').readAsBytesSync();
+      final attachment = await m.postMedia(img, 'image/png');
+
+      final post = Post(
+          status: "It's Jackhammer Jill!",
+          media_ids: [attachment.id],
+          visibility: "private");
+      final status = await m.postStatus(post);
+      await m.deleteStatus(status.id);
     });
   });
 }

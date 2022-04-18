@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.2.3
+
+- Re-organised, and a couple of minor improvements
+
+## 0.2.2
+
+- You can post with an attachment now. See test 'Post and delete a status with attachment'
+
+## 0.2.1
+
+- Corrected ids to be Strings everywhere. 
+
 ## 0.2.0
 
 - Updated to support Dart 2 and null-safety. 

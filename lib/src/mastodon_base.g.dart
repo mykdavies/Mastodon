@@ -53,8 +53,12 @@ _$_Status _$$_StatusFromJson(Map<String, dynamic> json) => _$_Status(
       visibility: json['visibility'] as String? ?? null,
       application: json['application'] as Map<String, dynamic>? ?? null,
       account: Account.fromJson(json['account'] as Map<String, dynamic>),
-      mentions: json['mentions'] as List<dynamic>,
-      tags: json['tags'] as List<dynamic>,
+      mentions: (json['mentions'] as List<dynamic>)
+          .map((e) => Mention.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      tags: (json['tags'] as List<dynamic>)
+          .map((e) => Tag.fromJson(e as Map<String, dynamic>))
+          .toList(),
       uri: json['uri'] as String,
       content: json['content'] as String,
       url: json['url'] as String? ?? null,
@@ -65,6 +69,15 @@ _$_Status _$$_StatusFromJson(Map<String, dynamic> json) => _$_Status(
           : Status.fromJson(json['reblog'] as Map<String, dynamic>),
       favourited: json['favourited'] as bool,
       reblogged: json['reblogged'] as bool,
+      media_ids: (json['media_ids'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          null,
+      media_attachments: (json['media_attachments'] as List<dynamic>?)
+              ?.map((e) => Attachment.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          null,
+      text: json['text'] as String? ?? null,
     );
 
 Map<String, dynamic> _$$_StatusToJson(_$_Status instance) => <String, dynamic>{
@@ -87,14 +100,20 @@ Map<String, dynamic> _$$_StatusToJson(_$_Status instance) => <String, dynamic>{
       'reblog': instance.reblog,
       'favourited': instance.favourited,
       'reblogged': instance.reblogged,
+      'media_ids': instance.media_ids,
+      'media_attachments': instance.media_attachments,
+      'text': instance.text,
     };
 
 _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
       status: json['status'] as String,
-      in_reply_to_id: json['in_reply_to_id'] as int? ?? null,
-      media_ids: json['media_ids'] as List<dynamic>? ?? null,
-      sensitivity: json['sensitivity'] as bool? ?? false,
-      visibility: json['visibility'] as String? ?? 'public',
+      in_reply_to_id: json['in_reply_to_id'] as String? ?? null,
+      media_ids: (json['media_ids'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList() ??
+          null,
+      sensitivity: json['sensitivity'] as bool? ?? null,
+      visibility: json['visibility'] as String? ?? null,
       spoiler_text: json['spoiler_text'] as String? ?? null,
     );
 
@@ -109,7 +128,7 @@ Map<String, dynamic> _$$_PostToJson(_$_Post instance) => <String, dynamic>{
 
 _$_Notification _$$_NotificationFromJson(Map<String, dynamic> json) =>
     _$_Notification(
-      id: json['id'] as int,
+      id: json['id'] as String,
       type: json['type'] as String,
       created_at: DateTime.parse(json['created_at'] as String),
       account: Account.fromJson(json['account'] as Map<String, dynamic>),
@@ -147,7 +166,7 @@ Map<String, dynamic> _$$_TimelineRequestToJson(_$_TimelineRequest instance) =>
 
 _$_Relationship _$$_RelationshipFromJson(Map<String, dynamic> json) =>
     _$_Relationship(
-      id: json['id'] as int,
+      id: json['id'] as String,
       following: json['following'] as bool,
       followed_by: json['followed_by'] as bool,
       blocking: json['blocking'] as bool,
@@ -166,7 +185,7 @@ Map<String, dynamic> _$$_RelationshipToJson(_$_Relationship instance) =>
     };
 
 _$_Report _$$_ReportFromJson(Map<String, dynamic> json) => _$_Report(
-      id: json['id'] as int,
+      id: json['id'] as String,
       action_taken: json['action_taken'] as String,
     );
 
@@ -177,10 +196,10 @@ Map<String, dynamic> _$$_ReportToJson(_$_Report instance) => <String, dynamic>{
 
 _$_Attachment _$$_AttachmentFromJson(Map<String, dynamic> json) =>
     _$_Attachment(
-      id: json['id'] as int,
+      id: json['id'] as String,
       type: json['type'] as String,
       url: json['url'] as String,
-      remote_url: json['remote_url'] as String,
+      remote_url: json['remote_url'] as String? ?? null,
       preview_url: json['preview_url'] as String,
       text_url: json['text_url'] as String,
     );
@@ -193,4 +212,29 @@ Map<String, dynamic> _$$_AttachmentToJson(_$_Attachment instance) =>
       'remote_url': instance.remote_url,
       'preview_url': instance.preview_url,
       'text_url': instance.text_url,
+    };
+
+_$_Tag _$$_TagFromJson(Map<String, dynamic> json) => _$_Tag(
+      name: json['name'] as String,
+      url: json['url'] as String,
+    );
+
+Map<String, dynamic> _$$_TagToJson(_$_Tag instance) => <String, dynamic>{
+      'name': instance.name,
+      'url': instance.url,
+    };
+
+_$_Mention _$$_MentionFromJson(Map<String, dynamic> json) => _$_Mention(
+      id: json['id'] as String,
+      username: json['username'] as String,
+      acct: json['acct'] as String,
+      url: json['url'] as String,
+    );
+
+Map<String, dynamic> _$$_MentionToJson(_$_Mention instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'username': instance.username,
+      'acct': instance.acct,
+      'url': instance.url,
     };

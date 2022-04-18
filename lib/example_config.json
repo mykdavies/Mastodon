@@ -1,5 +1,6 @@
 {
+  "instance": "mastodon.cloud",
+  "access_token": "akeyhere12341234",
   "client_id": "akeyhere12341234",
-  "client_secret": "akeyhere12341234",
-  "access_token": "akeyhere12341234"
+  "client_secret": "akeyhere12341234"
 }

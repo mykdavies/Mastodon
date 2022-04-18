@@ -508,8 +508,8 @@ class _$StatusTearOff {
       String? visibility = null,
       Map<String, dynamic>? application = null,
       required Account account,
-      required List<dynamic> mentions,
-      required List<dynamic> tags,
+      required List<Mention> mentions,
+      required List<Tag> tags,
       required String uri,
       required String content,
       String? url = null,
@@ -517,7 +517,10 @@ class _$StatusTearOff {
       required int favourites_count,
       Status? reblog = null,
       required bool favourited,
-      required bool reblogged}) {
+      required bool reblogged,
+      List<String>? media_ids = null,
+      List<Attachment>? media_attachments = null,
+      String? text = null}) {
     return _Status(
       id: id,
       created_at: created_at,
@@ -538,6 +541,9 @@ class _$StatusTearOff {
       reblog: reblog,
       favourited: favourited,
       reblogged: reblogged,
+      media_ids: media_ids,
+      media_attachments: media_attachments,
+      text: text,
     );
   }
 
@@ -560,16 +566,19 @@ mixin _$Status {
   String? get visibility => throw _privateConstructorUsedError;
   Map<String, dynamic>? get application => throw _privateConstructorUsedError;
   Account get account => throw _privateConstructorUsedError;
-  List<dynamic> get mentions => throw _privateConstructorUsedError;
-  List<dynamic> get tags => throw _privateConstructorUsedError;
+  List<Mention> get mentions => throw _privateConstructorUsedError;
+  List<Tag> get tags => throw _privateConstructorUsedError;
   String get uri => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
   String? get url => throw _privateConstructorUsedError;
   int get reblogs_count => throw _privateConstructorUsedError;
   int get favourites_count => throw _privateConstructorUsedError;
-  Status? get reblog => throw _privateConstructorUsedError; //???
-  bool get favourited => throw _privateConstructorUsedError; //???
+  Status? get reblog => throw _privateConstructorUsedError;
+  bool get favourited => throw _privateConstructorUsedError;
   bool get reblogged => throw _privateConstructorUsedError;
+  List<String>? get media_ids => throw _privateConstructorUsedError;
+  List<Attachment>? get media_attachments => throw _privateConstructorUsedError;
+  String? get text => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -590,8 +599,8 @@ abstract class $StatusCopyWith<$Res> {
       String? visibility,
       Map<String, dynamic>? application,
       Account account,
-      List<dynamic> mentions,
-      List<dynamic> tags,
+      List<Mention> mentions,
+      List<Tag> tags,
       String uri,
       String content,
       String? url,
@@ -599,7 +608,10 @@ abstract class $StatusCopyWith<$Res> {
       int favourites_count,
       Status? reblog,
       bool favourited,
-      bool reblogged});
+      bool reblogged,
+      List<String>? media_ids,
+      List<Attachment>? media_attachments,
+      String? text});
 
   $AccountCopyWith<$Res> get account;
   $StatusCopyWith<$Res>? get reblog;
@@ -634,6 +646,9 @@ class _$StatusCopyWithImpl<$Res> implements $StatusCopyWith<$Res> {
     Object? reblog = freezed,
     Object? favourited = freezed,
     Object? reblogged = freezed,
+    Object? media_ids = freezed,
+    Object? media_attachments = freezed,
+    Object? text = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -675,11 +690,11 @@ class _$StatusCopyWithImpl<$Res> implements $StatusCopyWith<$Res> {
       mentions: mentions == freezed
           ? _value.mentions
           : mentions // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<Mention>,
       tags: tags == freezed
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<Tag>,
       uri: uri == freezed
           ? _value.uri
           : uri // ignore: cast_nullable_to_non_nullable
@@ -712,6 +727,18 @@ class _$StatusCopyWithImpl<$Res> implements $StatusCopyWith<$Res> {
           ? _value.reblogged
           : reblogged // ignore: cast_nullable_to_non_nullable
               as bool,
+      media_ids: media_ids == freezed
+          ? _value.media_ids
+          : media_ids // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      media_attachments: media_attachments == freezed
+          ? _value.media_attachments
+          : media_attachments // ignore: cast_nullable_to_non_nullable
+              as List<Attachment>?,
+      text: text == freezed
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 
@@ -749,8 +776,8 @@ abstract class _$StatusCopyWith<$Res> implements $StatusCopyWith<$Res> {
       String? visibility,
       Map<String, dynamic>? application,
       Account account,
-      List<dynamic> mentions,
-      List<dynamic> tags,
+      List<Mention> mentions,
+      List<Tag> tags,
       String uri,
       String content,
       String? url,
@@ -758,7 +785,10 @@ abstract class _$StatusCopyWith<$Res> implements $StatusCopyWith<$Res> {
       int favourites_count,
       Status? reblog,
       bool favourited,
-      bool reblogged});
+      bool reblogged,
+      List<String>? media_ids,
+      List<Attachment>? media_attachments,
+      String? text});
 
   @override
   $AccountCopyWith<$Res> get account;
@@ -796,6 +826,9 @@ class __$StatusCopyWithImpl<$Res> extends _$StatusCopyWithImpl<$Res>
     Object? reblog = freezed,
     Object? favourited = freezed,
     Object? reblogged = freezed,
+    Object? media_ids = freezed,
+    Object? media_attachments = freezed,
+    Object? text = freezed,
   }) {
     return _then(_Status(
       id: id == freezed
@@ -837,11 +870,11 @@ class __$StatusCopyWithImpl<$Res> extends _$StatusCopyWithImpl<$Res>
       mentions: mentions == freezed
           ? _value.mentions
           : mentions // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<Mention>,
       tags: tags == freezed
           ? _value.tags
           : tags // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<Tag>,
       uri: uri == freezed
           ? _value.uri
           : uri // ignore: cast_nullable_to_non_nullable
@@ -874,6 +907,18 @@ class __$StatusCopyWithImpl<$Res> extends _$StatusCopyWithImpl<$Res>
           ? _value.reblogged
           : reblogged // ignore: cast_nullable_to_non_nullable
               as bool,
+      media_ids: media_ids == freezed
+          ? _value.media_ids
+          : media_ids // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      media_attachments: media_attachments == freezed
+          ? _value.media_attachments
+          : media_attachments // ignore: cast_nullable_to_non_nullable
+              as List<Attachment>?,
+      text: text == freezed
+          ? _value.text
+          : text // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -900,7 +945,10 @@ class _$_Status implements _Status {
       required this.favourites_count,
       this.reblog = null,
       required this.favourited,
-      required this.reblogged});
+      required this.reblogged,
+      this.media_ids = null,
+      this.media_attachments = null,
+      this.text = null});
 
   factory _$_Status.fromJson(Map<String, dynamic> json) =>
       _$$_StatusFromJson(json);
@@ -928,9 +976,9 @@ class _$_Status implements _Status {
   @override
   final Account account;
   @override
-  final List<dynamic> mentions;
+  final List<Mention> mentions;
   @override
-  final List<dynamic> tags;
+  final List<Tag> tags;
   @override
   final String uri;
   @override
@@ -945,14 +993,23 @@ class _$_Status implements _Status {
   @JsonKey()
   @override
   final Status? reblog;
-  @override //???
+  @override
   final bool favourited;
-  @override //???
+  @override
   final bool reblogged;
+  @JsonKey()
+  @override
+  final List<String>? media_ids;
+  @JsonKey()
+  @override
+  final List<Attachment>? media_attachments;
+  @JsonKey()
+  @override
+  final String? text;
 
   @override
   String toString() {
-    return 'Status(id: $id, created_at: $created_at, in_reply_to_id: $in_reply_to_id, in_reply_to_account_id: $in_reply_to_account_id, sensitive: $sensitive, spoiler_text: $spoiler_text, visibility: $visibility, application: $application, account: $account, mentions: $mentions, tags: $tags, uri: $uri, content: $content, url: $url, reblogs_count: $reblogs_count, favourites_count: $favourites_count, reblog: $reblog, favourited: $favourited, reblogged: $reblogged)';
+    return 'Status(id: $id, created_at: $created_at, in_reply_to_id: $in_reply_to_id, in_reply_to_account_id: $in_reply_to_account_id, sensitive: $sensitive, spoiler_text: $spoiler_text, visibility: $visibility, application: $application, account: $account, mentions: $mentions, tags: $tags, uri: $uri, content: $content, url: $url, reblogs_count: $reblogs_count, favourites_count: $favourites_count, reblog: $reblog, favourited: $favourited, reblogged: $reblogged, media_ids: $media_ids, media_attachments: $media_attachments, text: $text)';
   }
 
   @override
@@ -987,7 +1044,11 @@ class _$_Status implements _Status {
             const DeepCollectionEquality().equals(other.reblog, reblog) &&
             const DeepCollectionEquality()
                 .equals(other.favourited, favourited) &&
-            const DeepCollectionEquality().equals(other.reblogged, reblogged));
+            const DeepCollectionEquality().equals(other.reblogged, reblogged) &&
+            const DeepCollectionEquality().equals(other.media_ids, media_ids) &&
+            const DeepCollectionEquality()
+                .equals(other.media_attachments, media_attachments) &&
+            const DeepCollectionEquality().equals(other.text, text));
   }
 
   @override
@@ -1011,7 +1072,10 @@ class _$_Status implements _Status {
         const DeepCollectionEquality().hash(favourites_count),
         const DeepCollectionEquality().hash(reblog),
         const DeepCollectionEquality().hash(favourited),
-        const DeepCollectionEquality().hash(reblogged)
+        const DeepCollectionEquality().hash(reblogged),
+        const DeepCollectionEquality().hash(media_ids),
+        const DeepCollectionEquality().hash(media_attachments),
+        const DeepCollectionEquality().hash(text)
       ]);
 
   @JsonKey(ignore: true)
@@ -1036,8 +1100,8 @@ abstract class _Status implements Status {
       String? visibility,
       Map<String, dynamic>? application,
       required Account account,
-      required List<dynamic> mentions,
-      required List<dynamic> tags,
+      required List<Mention> mentions,
+      required List<Tag> tags,
       required String uri,
       required String content,
       String? url,
@@ -1045,7 +1109,10 @@ abstract class _Status implements Status {
       required int favourites_count,
       Status? reblog,
       required bool favourited,
-      required bool reblogged}) = _$_Status;
+      required bool reblogged,
+      List<String>? media_ids,
+      List<Attachment>? media_attachments,
+      String? text}) = _$_Status;
 
   factory _Status.fromJson(Map<String, dynamic> json) = _$_Status.fromJson;
 
@@ -1068,9 +1135,9 @@ abstract class _Status implements Status {
   @override
   Account get account;
   @override
-  List<dynamic> get mentions;
+  List<Mention> get mentions;
   @override
-  List<dynamic> get tags;
+  List<Tag> get tags;
   @override
   String get uri;
   @override
@@ -1083,10 +1150,16 @@ abstract class _Status implements Status {
   int get favourites_count;
   @override
   Status? get reblog;
-  @override //???
+  @override
   bool get favourited;
-  @override //???
+  @override
   bool get reblogged;
+  @override
+  List<String>? get media_ids;
+  @override
+  List<Attachment>? get media_attachments;
+  @override
+  String? get text;
   @override
   @JsonKey(ignore: true)
   _$StatusCopyWith<_Status> get copyWith => throw _privateConstructorUsedError;
@@ -1102,10 +1175,10 @@ class _$PostTearOff {
 
   _Post call(
       {required String status,
-      int? in_reply_to_id = null,
-      List<dynamic>? media_ids = null,
-      bool? sensitivity = false,
-      String? visibility = 'public',
+      String? in_reply_to_id = null,
+      List<String>? media_ids = null,
+      bool? sensitivity = null,
+      String? visibility = null,
       String? spoiler_text = null}) {
     return _Post(
       status: status,
@@ -1128,8 +1201,8 @@ const $Post = _$PostTearOff();
 /// @nodoc
 mixin _$Post {
   String get status => throw _privateConstructorUsedError;
-  int? get in_reply_to_id => throw _privateConstructorUsedError;
-  List<dynamic>? get media_ids => throw _privateConstructorUsedError;
+  String? get in_reply_to_id => throw _privateConstructorUsedError;
+  List<String>? get media_ids => throw _privateConstructorUsedError;
   bool? get sensitivity => throw _privateConstructorUsedError;
   String? get visibility => throw _privateConstructorUsedError;
   String? get spoiler_text => throw _privateConstructorUsedError;
@@ -1145,8 +1218,8 @@ abstract class $PostCopyWith<$Res> {
       _$PostCopyWithImpl<$Res>;
   $Res call(
       {String status,
-      int? in_reply_to_id,
-      List<dynamic>? media_ids,
+      String? in_reply_to_id,
+      List<String>? media_ids,
       bool? sensitivity,
       String? visibility,
       String? spoiler_text});
@@ -1177,11 +1250,11 @@ class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
       in_reply_to_id: in_reply_to_id == freezed
           ? _value.in_reply_to_id
           : in_reply_to_id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       media_ids: media_ids == freezed
           ? _value.media_ids
           : media_ids // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<String>?,
       sensitivity: sensitivity == freezed
           ? _value.sensitivity
           : sensitivity // ignore: cast_nullable_to_non_nullable
@@ -1205,8 +1278,8 @@ abstract class _$PostCopyWith<$Res> implements $PostCopyWith<$Res> {
   @override
   $Res call(
       {String status,
-      int? in_reply_to_id,
-      List<dynamic>? media_ids,
+      String? in_reply_to_id,
+      List<String>? media_ids,
       bool? sensitivity,
       String? visibility,
       String? spoiler_text});
@@ -1238,11 +1311,11 @@ class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
       in_reply_to_id: in_reply_to_id == freezed
           ? _value.in_reply_to_id
           : in_reply_to_id // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       media_ids: media_ids == freezed
           ? _value.media_ids
           : media_ids // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>?,
+              as List<String>?,
       sensitivity: sensitivity == freezed
           ? _value.sensitivity
           : sensitivity // ignore: cast_nullable_to_non_nullable
@@ -1266,8 +1339,8 @@ class _$_Post implements _Post {
       {required this.status,
       this.in_reply_to_id = null,
       this.media_ids = null,
-      this.sensitivity = false,
-      this.visibility = 'public',
+      this.sensitivity = null,
+      this.visibility = null,
       this.spoiler_text = null});
 
   factory _$_Post.fromJson(Map<String, dynamic> json) => _$$_PostFromJson(json);
@@ -1276,10 +1349,10 @@ class _$_Post implements _Post {
   final String status;
   @JsonKey()
   @override
-  final int? in_reply_to_id;
+  final String? in_reply_to_id;
   @JsonKey()
   @override
-  final List<dynamic>? media_ids;
+  final List<String>? media_ids;
   @JsonKey()
   @override
   final bool? sensitivity;
@@ -1336,8 +1409,8 @@ class _$_Post implements _Post {
 abstract class _Post implements Post {
   factory _Post(
       {required String status,
-      int? in_reply_to_id,
-      List<dynamic>? media_ids,
+      String? in_reply_to_id,
+      List<String>? media_ids,
       bool? sensitivity,
       String? visibility,
       String? spoiler_text}) = _$_Post;
@@ -1347,9 +1420,9 @@ abstract class _Post implements Post {
   @override
   String get status;
   @override
-  int? get in_reply_to_id;
+  String? get in_reply_to_id;
   @override
-  List<dynamic>? get media_ids;
+  List<String>? get media_ids;
   @override
   bool? get sensitivity;
   @override
@@ -1370,7 +1443,7 @@ class _$NotificationTearOff {
   const _$NotificationTearOff();
 
   _Notification call(
-      {required int id,
+      {required String id,
       required String type,
       required DateTime created_at,
       required Account account,
@@ -1394,7 +1467,7 @@ const $Notification = _$NotificationTearOff();
 
 /// @nodoc
 mixin _$Notification {
-  int get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   DateTime get created_at => throw _privateConstructorUsedError;
   Account get account => throw _privateConstructorUsedError;
@@ -1412,7 +1485,7 @@ abstract class $NotificationCopyWith<$Res> {
           Notification value, $Res Function(Notification) then) =
       _$NotificationCopyWithImpl<$Res>;
   $Res call(
-      {int id,
+      {String id,
       String type,
       DateTime created_at,
       Account account,
@@ -1442,7 +1515,7 @@ class _$NotificationCopyWithImpl<$Res> implements $NotificationCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -1485,7 +1558,7 @@ abstract class _$NotificationCopyWith<$Res>
       __$NotificationCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int id,
+      {String id,
       String type,
       DateTime created_at,
       Account account,
@@ -1519,7 +1592,7 @@ class __$NotificationCopyWithImpl<$Res> extends _$NotificationCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -1554,7 +1627,7 @@ class _$_Notification implements _Notification {
       _$$_NotificationFromJson(json);
 
   @override
-  final int id;
+  final String id;
   @override
   final String type;
   @override
@@ -1604,7 +1677,7 @@ class _$_Notification implements _Notification {
 
 abstract class _Notification implements Notification {
   factory _Notification(
-      {required int id,
+      {required String id,
       required String type,
       required DateTime created_at,
       required Account account,
@@ -1614,7 +1687,7 @@ abstract class _Notification implements Notification {
       _$_Notification.fromJson;
 
   @override
-  int get id;
+  String get id;
   @override
   String get type;
   @override
@@ -1881,7 +1954,7 @@ class _$RelationshipTearOff {
   const _$RelationshipTearOff();
 
   _Relationship call(
-      {required int id,
+      {required String id,
       required bool following,
       required bool followed_by,
       required bool blocking,
@@ -1907,7 +1980,7 @@ const $Relationship = _$RelationshipTearOff();
 
 /// @nodoc
 mixin _$Relationship {
-  int get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   bool get following => throw _privateConstructorUsedError;
   bool get followed_by => throw _privateConstructorUsedError;
   bool get blocking => throw _privateConstructorUsedError;
@@ -1926,7 +1999,7 @@ abstract class $RelationshipCopyWith<$Res> {
           Relationship value, $Res Function(Relationship) then) =
       _$RelationshipCopyWithImpl<$Res>;
   $Res call(
-      {int id,
+      {String id,
       bool following,
       bool followed_by,
       bool blocking,
@@ -1955,7 +2028,7 @@ class _$RelationshipCopyWithImpl<$Res> implements $RelationshipCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       following: following == freezed
           ? _value.following
           : following // ignore: cast_nullable_to_non_nullable
@@ -1988,7 +2061,7 @@ abstract class _$RelationshipCopyWith<$Res>
       __$RelationshipCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int id,
+      {String id,
       bool following,
       bool followed_by,
       bool blocking,
@@ -2019,7 +2092,7 @@ class __$RelationshipCopyWithImpl<$Res> extends _$RelationshipCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       following: following == freezed
           ? _value.following
           : following // ignore: cast_nullable_to_non_nullable
@@ -2059,7 +2132,7 @@ class _$_Relationship implements _Relationship {
       _$$_RelationshipFromJson(json);
 
   @override
-  final int id;
+  final String id;
   @override
   final bool following;
   @override
@@ -2113,7 +2186,7 @@ class _$_Relationship implements _Relationship {
 
 abstract class _Relationship implements Relationship {
   factory _Relationship(
-      {required int id,
+      {required String id,
       required bool following,
       required bool followed_by,
       required bool blocking,
@@ -2124,7 +2197,7 @@ abstract class _Relationship implements Relationship {
       _$_Relationship.fromJson;
 
   @override
-  int get id;
+  String get id;
   @override
   bool get following;
   @override
@@ -2149,7 +2222,7 @@ Report _$ReportFromJson(Map<String, dynamic> json) {
 class _$ReportTearOff {
   const _$ReportTearOff();
 
-  _Report call({required int id, required String action_taken}) {
+  _Report call({required String id, required String action_taken}) {
     return _Report(
       id: id,
       action_taken: action_taken,
@@ -2166,7 +2239,7 @@ const $Report = _$ReportTearOff();
 
 /// @nodoc
 mixin _$Report {
-  int get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get action_taken => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -2178,7 +2251,7 @@ mixin _$Report {
 abstract class $ReportCopyWith<$Res> {
   factory $ReportCopyWith(Report value, $Res Function(Report) then) =
       _$ReportCopyWithImpl<$Res>;
-  $Res call({int id, String action_taken});
+  $Res call({String id, String action_taken});
 }
 
 /// @nodoc
@@ -2198,7 +2271,7 @@ class _$ReportCopyWithImpl<$Res> implements $ReportCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       action_taken: action_taken == freezed
           ? _value.action_taken
           : action_taken // ignore: cast_nullable_to_non_nullable
@@ -2212,7 +2285,7 @@ abstract class _$ReportCopyWith<$Res> implements $ReportCopyWith<$Res> {
   factory _$ReportCopyWith(_Report value, $Res Function(_Report) then) =
       __$ReportCopyWithImpl<$Res>;
   @override
-  $Res call({int id, String action_taken});
+  $Res call({String id, String action_taken});
 }
 
 /// @nodoc
@@ -2233,7 +2306,7 @@ class __$ReportCopyWithImpl<$Res> extends _$ReportCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       action_taken: action_taken == freezed
           ? _value.action_taken
           : action_taken // ignore: cast_nullable_to_non_nullable
@@ -2251,7 +2324,7 @@ class _$_Report implements _Report {
       _$$_ReportFromJson(json);
 
   @override
-  final int id;
+  final String id;
   @override
   final String action_taken;
 
@@ -2288,12 +2361,13 @@ class _$_Report implements _Report {
 }
 
 abstract class _Report implements Report {
-  factory _Report({required int id, required String action_taken}) = _$_Report;
+  factory _Report({required String id, required String action_taken}) =
+      _$_Report;
 
   factory _Report.fromJson(Map<String, dynamic> json) = _$_Report.fromJson;
 
   @override
-  int get id;
+  String get id;
   @override
   String get action_taken;
   @override
@@ -2310,10 +2384,10 @@ class _$AttachmentTearOff {
   const _$AttachmentTearOff();
 
   _Attachment call(
-      {required int id,
+      {required String id,
       required String type,
       required String url,
-      required String remote_url,
+      String? remote_url = null,
       required String preview_url,
       required String text_url}) {
     return _Attachment(
@@ -2336,10 +2410,10 @@ const $Attachment = _$AttachmentTearOff();
 
 /// @nodoc
 mixin _$Attachment {
-  int get id => throw _privateConstructorUsedError;
+  String get id => throw _privateConstructorUsedError;
   String get type => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
-  String get remote_url => throw _privateConstructorUsedError;
+  String? get remote_url => throw _privateConstructorUsedError;
   String get preview_url => throw _privateConstructorUsedError;
   String get text_url => throw _privateConstructorUsedError;
 
@@ -2355,10 +2429,10 @@ abstract class $AttachmentCopyWith<$Res> {
           Attachment value, $Res Function(Attachment) then) =
       _$AttachmentCopyWithImpl<$Res>;
   $Res call(
-      {int id,
+      {String id,
       String type,
       String url,
-      String remote_url,
+      String? remote_url,
       String preview_url,
       String text_url});
 }
@@ -2384,7 +2458,7 @@ class _$AttachmentCopyWithImpl<$Res> implements $AttachmentCopyWith<$Res> {
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -2396,7 +2470,7 @@ class _$AttachmentCopyWithImpl<$Res> implements $AttachmentCopyWith<$Res> {
       remote_url: remote_url == freezed
           ? _value.remote_url
           : remote_url // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       preview_url: preview_url == freezed
           ? _value.preview_url
           : preview_url // ignore: cast_nullable_to_non_nullable
@@ -2416,10 +2490,10 @@ abstract class _$AttachmentCopyWith<$Res> implements $AttachmentCopyWith<$Res> {
       __$AttachmentCopyWithImpl<$Res>;
   @override
   $Res call(
-      {int id,
+      {String id,
       String type,
       String url,
-      String remote_url,
+      String? remote_url,
       String preview_url,
       String text_url});
 }
@@ -2447,7 +2521,7 @@ class __$AttachmentCopyWithImpl<$Res> extends _$AttachmentCopyWithImpl<$Res>
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       type: type == freezed
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
@@ -2459,7 +2533,7 @@ class __$AttachmentCopyWithImpl<$Res> extends _$AttachmentCopyWithImpl<$Res>
       remote_url: remote_url == freezed
           ? _value.remote_url
           : remote_url // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       preview_url: preview_url == freezed
           ? _value.preview_url
           : preview_url // ignore: cast_nullable_to_non_nullable
@@ -2479,7 +2553,7 @@ class _$_Attachment implements _Attachment {
       {required this.id,
       required this.type,
       required this.url,
-      required this.remote_url,
+      this.remote_url = null,
       required this.preview_url,
       required this.text_url});
 
@@ -2487,13 +2561,14 @@ class _$_Attachment implements _Attachment {
       _$$_AttachmentFromJson(json);
 
   @override
-  final int id;
+  final String id;
   @override
   final String type;
   @override
   final String url;
+  @JsonKey()
   @override
-  final String remote_url;
+  final String? remote_url;
   @override
   final String preview_url;
   @override
@@ -2542,10 +2617,10 @@ class _$_Attachment implements _Attachment {
 
 abstract class _Attachment implements Attachment {
   factory _Attachment(
-      {required int id,
+      {required String id,
       required String type,
       required String url,
-      required String remote_url,
+      String? remote_url,
       required String preview_url,
       required String text_url}) = _$_Attachment;
 
@@ -2553,13 +2628,13 @@ abstract class _Attachment implements Attachment {
       _$_Attachment.fromJson;
 
   @override
-  int get id;
+  String get id;
   @override
   String get type;
   @override
   String get url;
   @override
-  String get remote_url;
+  String? get remote_url;
   @override
   String get preview_url;
   @override
@@ -2567,5 +2642,371 @@ abstract class _Attachment implements Attachment {
   @override
   @JsonKey(ignore: true)
   _$AttachmentCopyWith<_Attachment> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+Tag _$TagFromJson(Map<String, dynamic> json) {
+  return _Tag.fromJson(json);
+}
+
+/// @nodoc
+class _$TagTearOff {
+  const _$TagTearOff();
+
+  _Tag call({required String name, required String url}) {
+    return _Tag(
+      name: name,
+      url: url,
+    );
+  }
+
+  Tag fromJson(Map<String, Object?> json) {
+    return Tag.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $Tag = _$TagTearOff();
+
+/// @nodoc
+mixin _$Tag {
+  String get name => throw _privateConstructorUsedError;
+  String get url => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $TagCopyWith<Tag> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TagCopyWith<$Res> {
+  factory $TagCopyWith(Tag value, $Res Function(Tag) then) =
+      _$TagCopyWithImpl<$Res>;
+  $Res call({String name, String url});
+}
+
+/// @nodoc
+class _$TagCopyWithImpl<$Res> implements $TagCopyWith<$Res> {
+  _$TagCopyWithImpl(this._value, this._then);
+
+  final Tag _value;
+  // ignore: unused_field
+  final $Res Function(Tag) _then;
+
+  @override
+  $Res call({
+    Object? name = freezed,
+    Object? url = freezed,
+  }) {
+    return _then(_value.copyWith(
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      url: url == freezed
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$TagCopyWith<$Res> implements $TagCopyWith<$Res> {
+  factory _$TagCopyWith(_Tag value, $Res Function(_Tag) then) =
+      __$TagCopyWithImpl<$Res>;
+  @override
+  $Res call({String name, String url});
+}
+
+/// @nodoc
+class __$TagCopyWithImpl<$Res> extends _$TagCopyWithImpl<$Res>
+    implements _$TagCopyWith<$Res> {
+  __$TagCopyWithImpl(_Tag _value, $Res Function(_Tag) _then)
+      : super(_value, (v) => _then(v as _Tag));
+
+  @override
+  _Tag get _value => super._value as _Tag;
+
+  @override
+  $Res call({
+    Object? name = freezed,
+    Object? url = freezed,
+  }) {
+    return _then(_Tag(
+      name: name == freezed
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      url: url == freezed
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Tag implements _Tag {
+  _$_Tag({required this.name, required this.url});
+
+  factory _$_Tag.fromJson(Map<String, dynamic> json) => _$$_TagFromJson(json);
+
+  @override
+  final String name;
+  @override
+  final String url;
+
+  @override
+  String toString() {
+    return 'Tag(name: $name, url: $url)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Tag &&
+            const DeepCollectionEquality().equals(other.name, name) &&
+            const DeepCollectionEquality().equals(other.url, url));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(name),
+      const DeepCollectionEquality().hash(url));
+
+  @JsonKey(ignore: true)
+  @override
+  _$TagCopyWith<_Tag> get copyWith =>
+      __$TagCopyWithImpl<_Tag>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_TagToJson(this);
+  }
+}
+
+abstract class _Tag implements Tag {
+  factory _Tag({required String name, required String url}) = _$_Tag;
+
+  factory _Tag.fromJson(Map<String, dynamic> json) = _$_Tag.fromJson;
+
+  @override
+  String get name;
+  @override
+  String get url;
+  @override
+  @JsonKey(ignore: true)
+  _$TagCopyWith<_Tag> get copyWith => throw _privateConstructorUsedError;
+}
+
+Mention _$MentionFromJson(Map<String, dynamic> json) {
+  return _Mention.fromJson(json);
+}
+
+/// @nodoc
+class _$MentionTearOff {
+  const _$MentionTearOff();
+
+  _Mention call(
+      {required String id,
+      required String username,
+      required String acct,
+      required String url}) {
+    return _Mention(
+      id: id,
+      username: username,
+      acct: acct,
+      url: url,
+    );
+  }
+
+  Mention fromJson(Map<String, Object?> json) {
+    return Mention.fromJson(json);
+  }
+}
+
+/// @nodoc
+const $Mention = _$MentionTearOff();
+
+/// @nodoc
+mixin _$Mention {
+  String get id => throw _privateConstructorUsedError;
+  String get username => throw _privateConstructorUsedError;
+  String get acct => throw _privateConstructorUsedError;
+  String get url => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $MentionCopyWith<Mention> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MentionCopyWith<$Res> {
+  factory $MentionCopyWith(Mention value, $Res Function(Mention) then) =
+      _$MentionCopyWithImpl<$Res>;
+  $Res call({String id, String username, String acct, String url});
+}
+
+/// @nodoc
+class _$MentionCopyWithImpl<$Res> implements $MentionCopyWith<$Res> {
+  _$MentionCopyWithImpl(this._value, this._then);
+
+  final Mention _value;
+  // ignore: unused_field
+  final $Res Function(Mention) _then;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? username = freezed,
+    Object? acct = freezed,
+    Object? url = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      username: username == freezed
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
+      acct: acct == freezed
+          ? _value.acct
+          : acct // ignore: cast_nullable_to_non_nullable
+              as String,
+      url: url == freezed
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+abstract class _$MentionCopyWith<$Res> implements $MentionCopyWith<$Res> {
+  factory _$MentionCopyWith(_Mention value, $Res Function(_Mention) then) =
+      __$MentionCopyWithImpl<$Res>;
+  @override
+  $Res call({String id, String username, String acct, String url});
+}
+
+/// @nodoc
+class __$MentionCopyWithImpl<$Res> extends _$MentionCopyWithImpl<$Res>
+    implements _$MentionCopyWith<$Res> {
+  __$MentionCopyWithImpl(_Mention _value, $Res Function(_Mention) _then)
+      : super(_value, (v) => _then(v as _Mention));
+
+  @override
+  _Mention get _value => super._value as _Mention;
+
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? username = freezed,
+    Object? acct = freezed,
+    Object? url = freezed,
+  }) {
+    return _then(_Mention(
+      id: id == freezed
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      username: username == freezed
+          ? _value.username
+          : username // ignore: cast_nullable_to_non_nullable
+              as String,
+      acct: acct == freezed
+          ? _value.acct
+          : acct // ignore: cast_nullable_to_non_nullable
+              as String,
+      url: url == freezed
+          ? _value.url
+          : url // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_Mention implements _Mention {
+  _$_Mention(
+      {required this.id,
+      required this.username,
+      required this.acct,
+      required this.url});
+
+  factory _$_Mention.fromJson(Map<String, dynamic> json) =>
+      _$$_MentionFromJson(json);
+
+  @override
+  final String id;
+  @override
+  final String username;
+  @override
+  final String acct;
+  @override
+  final String url;
+
+  @override
+  String toString() {
+    return 'Mention(id: $id, username: $username, acct: $acct, url: $url)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _Mention &&
+            const DeepCollectionEquality().equals(other.id, id) &&
+            const DeepCollectionEquality().equals(other.username, username) &&
+            const DeepCollectionEquality().equals(other.acct, acct) &&
+            const DeepCollectionEquality().equals(other.url, url));
+  }
+
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(id),
+      const DeepCollectionEquality().hash(username),
+      const DeepCollectionEquality().hash(acct),
+      const DeepCollectionEquality().hash(url));
+
+  @JsonKey(ignore: true)
+  @override
+  _$MentionCopyWith<_Mention> get copyWith =>
+      __$MentionCopyWithImpl<_Mention>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_MentionToJson(this);
+  }
+}
+
+abstract class _Mention implements Mention {
+  factory _Mention(
+      {required String id,
+      required String username,
+      required String acct,
+      required String url}) = _$_Mention;
+
+  factory _Mention.fromJson(Map<String, dynamic> json) = _$_Mention.fromJson;
+
+  @override
+  String get id;
+  @override
+  String get username;
+  @override
+  String get acct;
+  @override
+  String get url;
+  @override
+  @JsonKey(ignore: true)
+  _$MentionCopyWith<_Mention> get copyWith =>
       throw _privateConstructorUsedError;
 }

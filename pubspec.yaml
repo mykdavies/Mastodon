@@ -1,6 +1,6 @@
 name: mastodon
-description: A starting point for Mastodon access.
-version: 0.2.0
+description: A simple API client for Mastodon access.
+version: 0.2.3
 homepage: https://github.com/mykdavies/Mastodon
 
 environment:
