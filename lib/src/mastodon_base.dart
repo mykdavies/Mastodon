@@ -5,13 +5,15 @@
 /// Key classes that encapsulate information for sharing with
 /// the Mastodon server.
 ///
-/// See https://github.com/tootsuite/documentation/blob/master/Using-the-API/API.md for more information.
+/// See https://docs.joinmastodon.org/api/ for more information.
 ///
 
-//TODO: fix these!
+// Needed to stop the linting complaining about the API-driven variable names.
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+// Recommended for improved readabilty in devtools
+// import 'package:flutter/foundation.dart';
 
 // 2. add 'part' files
 part 'mastodon_base.freezed.dart';
@@ -48,7 +50,7 @@ class Account with _$Account {
 }
 
 /// A posted update.
-@freezed
+@unfreezed
 class Status with _$Status {
   /// Create a new Status. You probably want to use .fromJson() instead.
   factory Status({
@@ -59,6 +61,7 @@ class Status with _$Status {
     required bool sensitive,
     required String spoiler_text,
     @Default(null) String? visibility,
+    //@Default(null) Map<String, dynamic>? application,
     @Default(null) Map<String, dynamic>? application,
     required Account account,
     required List<Mention> mentions,
@@ -89,7 +92,7 @@ class Post with _$Post {
   factory Post({
     required String status,
     @Default(null) String? in_reply_to_id,
-    @Default(null) List<String>? media_ids,
+    @Default([]) List<String> media_ids,
     @Default(null) bool? sensitivity,
     @Default(null) String? visibility,
     @Default(null) String? spoiler_text,

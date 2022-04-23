@@ -42,7 +42,7 @@ class Mastodon {
       this.requestTimeout: _defaultTimeout,
       String credentials: ''}) {
     if (!["throw", "wait", "pace"].contains(ratelimitMethod)) {
-      throw new MastodonIllegalArgumentError('Invalid ratelimit method.');
+      throw MastodonIllegalArgumentError('Invalid ratelimit method.');
     }
   }
 
@@ -122,7 +122,7 @@ class Mastodon {
 
       params['grant_type'] = 'password';
     } else {
-      throw new MastodonIllegalArgumentError(
+      throw MastodonIllegalArgumentError(
           'Invalid arguments given. OAuth ID+Secret, OAuth auth/refresh code,'
           ' or username+password are required.');
     }
@@ -143,13 +143,13 @@ class Mastodon {
           response.containsKey('expires_in') ? response['expires_in'] : 0;
     } catch (e) {
       if (username.isNotEmpty || password.isNotEmpty) {
-        throw new MastodonIllegalArgumentError(
+        throw MastodonIllegalArgumentError(
             'Invalid user name, password, or redirect_uris: $e');
       } else if (code.isNotEmpty) {
-        throw new MastodonIllegalArgumentError(
+        throw MastodonIllegalArgumentError(
             'Invalid access token or redirect_uris: $e');
       } else {
-        throw new MastodonIllegalArgumentError('Invalid request: $e');
+        throw MastodonIllegalArgumentError('Invalid request: $e');
       }
     }
 
@@ -160,7 +160,7 @@ class Mastodon {
     final returnedScopes = _sorted(response['scope'].split(' ')).join(' ');
 
     if (returnedScopes != requestedScopes) {
-      throw new MastodonAPIError('Granted scopes "$returnedScopes"'
+      throw MastodonAPIError('Granted scopes "$returnedScopes"'
           ' differ from requested scopes "$requestedScopes".');
     }
 
@@ -193,14 +193,14 @@ class Mastodon {
     while (!requestComplete) {
       // This will be reset later if we are running into throttling issues.
       requestComplete = true;
-      final uri = new Uri.https(apiBaseUrl, endpoint, params);
+      final uri = Uri.https(apiBaseUrl, endpoint, params);
 
       var request;
 
       if (files.isEmpty) {
-        request = new Request(method, uri);
+        request = Request(method, uri);
       } else {
-        request = new MultipartRequest(method, uri);
+        request = MultipartRequest(method, uri);
         for (var f in files.keys) {
           await request.files.add(files[f]);
         }
@@ -220,15 +220,15 @@ class Mastodon {
       //TODO:  detect and handle timeout.
 
       if (responseObject.statusCode == 401) {
-        throw new MastodonAPIError('401 - Unauthorised access.');
+        throw MastodonAPIError('401 - Unauthorised access.');
       }
 
       if (responseObject.statusCode == 404) {
-        throw new MastodonAPIError('Endpoint not found.');
+        throw MastodonAPIError('Endpoint not found.');
       }
 
       if (responseObject.statusCode == 500) {
-        throw new MastodonAPIError('General API problem.');
+        throw MastodonAPIError('General API problem.');
       }
     }
 

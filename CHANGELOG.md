@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0
+
+- Upgraded to freezed 2.0. Couple more tests added.
+
 ## 0.2.3
 
 - Re-organised, and a couple of minor improvements

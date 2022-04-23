@@ -16,8 +16,8 @@ void main() {
 
     setUpAll(() {
       // See 'lib/example_config.json' for structure.
-      properties = jsonDecode(new File('lib/config.json').readAsStringSync());
-      m = new Mastodon.usingAccessToken(
+      properties = jsonDecode(File('lib/config.json').readAsStringSync());
+      m = Mastodon.usingAccessToken(
         properties['access_token'],
         instance: properties['instance'],
       );
@@ -48,7 +48,7 @@ void main() {
 
     setUpAll(() {
       // See 'lib/example_config.json' for structure.
-      properties = jsonDecode(new File('lib/config.json').readAsStringSync());
+      properties = jsonDecode(File('lib/config.json').readAsStringSync());
       m = Mastodon.usingAccessToken(
         properties['access_token'],
         instance: properties['instance'],
@@ -77,18 +77,18 @@ void main() {
 
     setUpAll(() {
       // See 'lib/example_config.json' for structure.
-      properties = jsonDecode(new File('lib/config.json').readAsStringSync());
+      properties = jsonDecode(File('lib/config.json').readAsStringSync());
     });
 
     test('Confirm instance okay', () async {
-      final m = new Mastodon();
+      final m = Mastodon();
 
       expect(await m.getInstance(), isNotEmpty,
           reason: 'No access to instance.');
     });
 
     test('Not logged on', () {
-      final m = new Mastodon();
+      final m = Mastodon();
 
       // Use expectLater to allow the Error to be caught by the matcher.
       expectLater(m.verifyAccount(), throwsUnsupportedError,
@@ -96,7 +96,7 @@ void main() {
     });
 
     test('Password logon', () async {
-      final m = new Mastodon();
+      final m = Mastodon();
       // ignore: unawaited_futures
       expectLater(
           m.logIn(
@@ -112,7 +112,7 @@ void main() {
     });
 
     test('OAuth logon', () async {
-      final m = new Mastodon.usingAccessToken(
+      final m = Mastodon.usingAccessToken(
         properties['access_token'],
         instance: properties['instance'],
       );
@@ -125,8 +125,8 @@ void main() {
     late Mastodon m;
     setUpAll(() {
       // See 'lib/example_config.json' for structure.
-      properties = jsonDecode(new File('lib/config.json').readAsStringSync());
-      m = new Mastodon.usingAccessToken(
+      properties = jsonDecode(File('lib/config.json').readAsStringSync());
+      m = Mastodon.usingAccessToken(
         properties['access_token'],
         instance: properties['instance'],
       );

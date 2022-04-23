@@ -25,11 +25,13 @@ See `mastodon_test.dart` for more clues.
 
 This package is intended to help with the building of simple bots.
 
-Incomplete and not well tested, so it is full of them.
-
-You might want to look at Luke Pighetti's (discontinued) https://pub.dev/packages/mastodon_dart for something richer and more reliable.
+Reasonably complete, but not well tested, so it is likely full of bugs.
 
 Fix them at https://github.com/mykdavies/Mastodon!
+
+Alternatively, you might want to look at Luke Piaghetti's (currently halted) 
+https://pub.dev/packages/mastodon_dart for something richer and more reliable.
+
 
 ## Todo
 

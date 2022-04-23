@@ -111,7 +111,7 @@ _$_Post _$$_PostFromJson(Map<String, dynamic> json) => _$_Post(
       media_ids: (json['media_ids'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList() ??
-          null,
+          const [],
       sensitivity: json['sensitivity'] as bool? ?? null,
       visibility: json['visibility'] as String? ?? null,
       spoiler_text: json['spoiler_text'] as String? ?? null,

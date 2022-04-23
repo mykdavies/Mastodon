@@ -12,58 +12,11 @@ part of 'mastodon_base.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 Account _$AccountFromJson(Map<String, dynamic> json) {
   return _Account.fromJson(json);
 }
-
-/// @nodoc
-class _$AccountTearOff {
-  const _$AccountTearOff();
-
-  _Account call(
-      {required String id,
-      required String username,
-      required String acct,
-      required String display_name,
-      required bool locked,
-      required DateTime created_at,
-      required int followers_count,
-      required int following_count,
-      required int statuses_count,
-      required String note,
-      required String url,
-      required String avatar,
-      required String avatar_static,
-      required String header,
-      required String header_static}) {
-    return _Account(
-      id: id,
-      username: username,
-      acct: acct,
-      display_name: display_name,
-      locked: locked,
-      created_at: created_at,
-      followers_count: followers_count,
-      following_count: following_count,
-      statuses_count: statuses_count,
-      note: note,
-      url: url,
-      avatar: avatar,
-      avatar_static: avatar_static,
-      header: header,
-      header_static: header_static,
-    );
-  }
-
-  Account fromJson(Map<String, Object?> json) {
-    return Account.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Account = _$AccountTearOff();
 
 /// @nodoc
 mixin _$Account {
@@ -404,6 +357,7 @@ class _$_Account implements _Account {
                 .equals(other.header_static, header_static));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -436,54 +390,54 @@ class _$_Account implements _Account {
 
 abstract class _Account implements Account {
   factory _Account(
-      {required String id,
-      required String username,
-      required String acct,
-      required String display_name,
-      required bool locked,
-      required DateTime created_at,
-      required int followers_count,
-      required int following_count,
-      required int statuses_count,
-      required String note,
-      required String url,
-      required String avatar,
-      required String avatar_static,
-      required String header,
-      required String header_static}) = _$_Account;
+      {required final String id,
+      required final String username,
+      required final String acct,
+      required final String display_name,
+      required final bool locked,
+      required final DateTime created_at,
+      required final int followers_count,
+      required final int following_count,
+      required final int statuses_count,
+      required final String note,
+      required final String url,
+      required final String avatar,
+      required final String avatar_static,
+      required final String header,
+      required final String header_static}) = _$_Account;
 
   factory _Account.fromJson(Map<String, dynamic> json) = _$_Account.fromJson;
 
   @override
-  String get id;
+  String get id => throw _privateConstructorUsedError;
   @override
-  String get username;
+  String get username => throw _privateConstructorUsedError;
   @override
-  String get acct;
+  String get acct => throw _privateConstructorUsedError;
   @override
-  String get display_name;
+  String get display_name => throw _privateConstructorUsedError;
   @override
-  bool get locked;
+  bool get locked => throw _privateConstructorUsedError;
   @override
-  DateTime get created_at;
+  DateTime get created_at => throw _privateConstructorUsedError;
   @override
-  int get followers_count;
+  int get followers_count => throw _privateConstructorUsedError;
   @override
-  int get following_count;
+  int get following_count => throw _privateConstructorUsedError;
   @override
-  int get statuses_count;
+  int get statuses_count => throw _privateConstructorUsedError;
   @override
-  String get note;
+  String get note => throw _privateConstructorUsedError;
   @override
-  String get url;
+  String get url => throw _privateConstructorUsedError;
   @override
-  String get avatar;
+  String get avatar => throw _privateConstructorUsedError;
   @override
-  String get avatar_static;
+  String get avatar_static => throw _privateConstructorUsedError;
   @override
-  String get header;
+  String get header => throw _privateConstructorUsedError;
   @override
-  String get header_static;
+  String get header_static => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$AccountCopyWith<_Account> get copyWith =>
@@ -495,90 +449,56 @@ Status _$StatusFromJson(Map<String, dynamic> json) {
 }
 
 /// @nodoc
-class _$StatusTearOff {
-  const _$StatusTearOff();
-
-  _Status call(
-      {required String id,
-      required DateTime created_at,
-      String? in_reply_to_id = null,
-      String? in_reply_to_account_id = null,
-      required bool sensitive,
-      required String spoiler_text,
-      String? visibility = null,
-      Map<String, dynamic>? application = null,
-      required Account account,
-      required List<Mention> mentions,
-      required List<Tag> tags,
-      required String uri,
-      required String content,
-      String? url = null,
-      required int reblogs_count,
-      required int favourites_count,
-      Status? reblog = null,
-      required bool favourited,
-      required bool reblogged,
-      List<String>? media_ids = null,
-      List<Attachment>? media_attachments = null,
-      String? text = null}) {
-    return _Status(
-      id: id,
-      created_at: created_at,
-      in_reply_to_id: in_reply_to_id,
-      in_reply_to_account_id: in_reply_to_account_id,
-      sensitive: sensitive,
-      spoiler_text: spoiler_text,
-      visibility: visibility,
-      application: application,
-      account: account,
-      mentions: mentions,
-      tags: tags,
-      uri: uri,
-      content: content,
-      url: url,
-      reblogs_count: reblogs_count,
-      favourites_count: favourites_count,
-      reblog: reblog,
-      favourited: favourited,
-      reblogged: reblogged,
-      media_ids: media_ids,
-      media_attachments: media_attachments,
-      text: text,
-    );
-  }
-
-  Status fromJson(Map<String, Object?> json) {
-    return Status.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Status = _$StatusTearOff();
-
-/// @nodoc
 mixin _$Status {
   String get id => throw _privateConstructorUsedError;
+  set id(String value) => throw _privateConstructorUsedError;
   DateTime get created_at => throw _privateConstructorUsedError;
+  set created_at(DateTime value) => throw _privateConstructorUsedError;
   String? get in_reply_to_id => throw _privateConstructorUsedError;
+  set in_reply_to_id(String? value) => throw _privateConstructorUsedError;
   String? get in_reply_to_account_id => throw _privateConstructorUsedError;
+  set in_reply_to_account_id(String? value) =>
+      throw _privateConstructorUsedError;
   bool get sensitive => throw _privateConstructorUsedError;
+  set sensitive(bool value) => throw _privateConstructorUsedError;
   String get spoiler_text => throw _privateConstructorUsedError;
+  set spoiler_text(String value) => throw _privateConstructorUsedError;
   String? get visibility => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get application => throw _privateConstructorUsedError;
+  set visibility(String? value) =>
+      throw _privateConstructorUsedError; //@Default(null) Map<String, dynamic>? application,
+  Map<String, dynamic>? get application =>
+      throw _privateConstructorUsedError; //@Default(null) Map<String, dynamic>? application,
+  set application(Map<String, dynamic>? value) =>
+      throw _privateConstructorUsedError;
   Account get account => throw _privateConstructorUsedError;
+  set account(Account value) => throw _privateConstructorUsedError;
   List<Mention> get mentions => throw _privateConstructorUsedError;
+  set mentions(List<Mention> value) => throw _privateConstructorUsedError;
   List<Tag> get tags => throw _privateConstructorUsedError;
+  set tags(List<Tag> value) => throw _privateConstructorUsedError;
   String get uri => throw _privateConstructorUsedError;
+  set uri(String value) => throw _privateConstructorUsedError;
   String get content => throw _privateConstructorUsedError;
+  set content(String value) => throw _privateConstructorUsedError;
   String? get url => throw _privateConstructorUsedError;
+  set url(String? value) => throw _privateConstructorUsedError;
   int get reblogs_count => throw _privateConstructorUsedError;
+  set reblogs_count(int value) => throw _privateConstructorUsedError;
   int get favourites_count => throw _privateConstructorUsedError;
+  set favourites_count(int value) => throw _privateConstructorUsedError;
   Status? get reblog => throw _privateConstructorUsedError;
+  set reblog(Status? value) => throw _privateConstructorUsedError;
   bool get favourited => throw _privateConstructorUsedError;
+  set favourited(bool value) => throw _privateConstructorUsedError;
   bool get reblogged => throw _privateConstructorUsedError;
+  set reblogged(bool value) => throw _privateConstructorUsedError;
   List<String>? get media_ids => throw _privateConstructorUsedError;
+  set media_ids(List<String>? value) => throw _privateConstructorUsedError;
   List<Attachment>? get media_attachments => throw _privateConstructorUsedError;
+  set media_attachments(List<Attachment>? value) =>
+      throw _privateConstructorUsedError;
   String? get text => throw _privateConstructorUsedError;
+  set text(String? value) => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -954,129 +874,64 @@ class _$_Status implements _Status {
       _$$_StatusFromJson(json);
 
   @override
-  final String id;
+  String id;
   @override
-  final DateTime created_at;
+  DateTime created_at;
+  @override
   @JsonKey()
+  String? in_reply_to_id;
   @override
-  final String? in_reply_to_id;
   @JsonKey()
+  String? in_reply_to_account_id;
   @override
-  final String? in_reply_to_account_id;
+  bool sensitive;
   @override
-  final bool sensitive;
+  String spoiler_text;
   @override
-  final String spoiler_text;
   @JsonKey()
+  String? visibility;
+//@Default(null) Map<String, dynamic>? application,
   @override
-  final String? visibility;
   @JsonKey()
+  Map<String, dynamic>? application;
   @override
-  final Map<String, dynamic>? application;
+  Account account;
   @override
-  final Account account;
+  List<Mention> mentions;
   @override
-  final List<Mention> mentions;
+  List<Tag> tags;
   @override
-  final List<Tag> tags;
+  String uri;
   @override
-  final String uri;
+  String content;
   @override
-  final String content;
   @JsonKey()
+  String? url;
   @override
-  final String? url;
+  int reblogs_count;
   @override
-  final int reblogs_count;
+  int favourites_count;
   @override
-  final int favourites_count;
   @JsonKey()
+  Status? reblog;
   @override
-  final Status? reblog;
+  bool favourited;
   @override
-  final bool favourited;
+  bool reblogged;
   @override
-  final bool reblogged;
   @JsonKey()
+  List<String>? media_ids;
   @override
-  final List<String>? media_ids;
   @JsonKey()
+  List<Attachment>? media_attachments;
   @override
-  final List<Attachment>? media_attachments;
   @JsonKey()
-  @override
-  final String? text;
+  String? text;
 
   @override
   String toString() {
     return 'Status(id: $id, created_at: $created_at, in_reply_to_id: $in_reply_to_id, in_reply_to_account_id: $in_reply_to_account_id, sensitive: $sensitive, spoiler_text: $spoiler_text, visibility: $visibility, application: $application, account: $account, mentions: $mentions, tags: $tags, uri: $uri, content: $content, url: $url, reblogs_count: $reblogs_count, favourites_count: $favourites_count, reblog: $reblog, favourited: $favourited, reblogged: $reblogged, media_ids: $media_ids, media_attachments: $media_attachments, text: $text)';
   }
-
-  @override
-  bool operator ==(dynamic other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _Status &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality()
-                .equals(other.created_at, created_at) &&
-            const DeepCollectionEquality()
-                .equals(other.in_reply_to_id, in_reply_to_id) &&
-            const DeepCollectionEquality()
-                .equals(other.in_reply_to_account_id, in_reply_to_account_id) &&
-            const DeepCollectionEquality().equals(other.sensitive, sensitive) &&
-            const DeepCollectionEquality()
-                .equals(other.spoiler_text, spoiler_text) &&
-            const DeepCollectionEquality()
-                .equals(other.visibility, visibility) &&
-            const DeepCollectionEquality()
-                .equals(other.application, application) &&
-            const DeepCollectionEquality().equals(other.account, account) &&
-            const DeepCollectionEquality().equals(other.mentions, mentions) &&
-            const DeepCollectionEquality().equals(other.tags, tags) &&
-            const DeepCollectionEquality().equals(other.uri, uri) &&
-            const DeepCollectionEquality().equals(other.content, content) &&
-            const DeepCollectionEquality().equals(other.url, url) &&
-            const DeepCollectionEquality()
-                .equals(other.reblogs_count, reblogs_count) &&
-            const DeepCollectionEquality()
-                .equals(other.favourites_count, favourites_count) &&
-            const DeepCollectionEquality().equals(other.reblog, reblog) &&
-            const DeepCollectionEquality()
-                .equals(other.favourited, favourited) &&
-            const DeepCollectionEquality().equals(other.reblogged, reblogged) &&
-            const DeepCollectionEquality().equals(other.media_ids, media_ids) &&
-            const DeepCollectionEquality()
-                .equals(other.media_attachments, media_attachments) &&
-            const DeepCollectionEquality().equals(other.text, text));
-  }
-
-  @override
-  int get hashCode => Object.hashAll([
-        runtimeType,
-        const DeepCollectionEquality().hash(id),
-        const DeepCollectionEquality().hash(created_at),
-        const DeepCollectionEquality().hash(in_reply_to_id),
-        const DeepCollectionEquality().hash(in_reply_to_account_id),
-        const DeepCollectionEquality().hash(sensitive),
-        const DeepCollectionEquality().hash(spoiler_text),
-        const DeepCollectionEquality().hash(visibility),
-        const DeepCollectionEquality().hash(application),
-        const DeepCollectionEquality().hash(account),
-        const DeepCollectionEquality().hash(mentions),
-        const DeepCollectionEquality().hash(tags),
-        const DeepCollectionEquality().hash(uri),
-        const DeepCollectionEquality().hash(content),
-        const DeepCollectionEquality().hash(url),
-        const DeepCollectionEquality().hash(reblogs_count),
-        const DeepCollectionEquality().hash(favourites_count),
-        const DeepCollectionEquality().hash(reblog),
-        const DeepCollectionEquality().hash(favourited),
-        const DeepCollectionEquality().hash(reblogged),
-        const DeepCollectionEquality().hash(media_ids),
-        const DeepCollectionEquality().hash(media_attachments),
-        const DeepCollectionEquality().hash(text)
-      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -1117,49 +972,49 @@ abstract class _Status implements Status {
   factory _Status.fromJson(Map<String, dynamic> json) = _$_Status.fromJson;
 
   @override
-  String get id;
+  String get id => throw _privateConstructorUsedError;
   @override
-  DateTime get created_at;
+  DateTime get created_at => throw _privateConstructorUsedError;
   @override
-  String? get in_reply_to_id;
+  String? get in_reply_to_id => throw _privateConstructorUsedError;
   @override
-  String? get in_reply_to_account_id;
+  String? get in_reply_to_account_id => throw _privateConstructorUsedError;
   @override
-  bool get sensitive;
+  bool get sensitive => throw _privateConstructorUsedError;
   @override
-  String get spoiler_text;
+  String get spoiler_text => throw _privateConstructorUsedError;
   @override
-  String? get visibility;
+  String? get visibility => throw _privateConstructorUsedError;
+  @override //@Default(null) Map<String, dynamic>? application,
+  Map<String, dynamic>? get application => throw _privateConstructorUsedError;
   @override
-  Map<String, dynamic>? get application;
+  Account get account => throw _privateConstructorUsedError;
   @override
-  Account get account;
+  List<Mention> get mentions => throw _privateConstructorUsedError;
   @override
-  List<Mention> get mentions;
+  List<Tag> get tags => throw _privateConstructorUsedError;
   @override
-  List<Tag> get tags;
+  String get uri => throw _privateConstructorUsedError;
   @override
-  String get uri;
+  String get content => throw _privateConstructorUsedError;
   @override
-  String get content;
+  String? get url => throw _privateConstructorUsedError;
   @override
-  String? get url;
+  int get reblogs_count => throw _privateConstructorUsedError;
   @override
-  int get reblogs_count;
+  int get favourites_count => throw _privateConstructorUsedError;
   @override
-  int get favourites_count;
+  Status? get reblog => throw _privateConstructorUsedError;
   @override
-  Status? get reblog;
+  bool get favourited => throw _privateConstructorUsedError;
   @override
-  bool get favourited;
+  bool get reblogged => throw _privateConstructorUsedError;
   @override
-  bool get reblogged;
+  List<String>? get media_ids => throw _privateConstructorUsedError;
   @override
-  List<String>? get media_ids;
+  List<Attachment>? get media_attachments => throw _privateConstructorUsedError;
   @override
-  List<Attachment>? get media_attachments;
-  @override
-  String? get text;
+  String? get text => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$StatusCopyWith<_Status> get copyWith => throw _privateConstructorUsedError;
@@ -1170,39 +1025,10 @@ Post _$PostFromJson(Map<String, dynamic> json) {
 }
 
 /// @nodoc
-class _$PostTearOff {
-  const _$PostTearOff();
-
-  _Post call(
-      {required String status,
-      String? in_reply_to_id = null,
-      List<String>? media_ids = null,
-      bool? sensitivity = null,
-      String? visibility = null,
-      String? spoiler_text = null}) {
-    return _Post(
-      status: status,
-      in_reply_to_id: in_reply_to_id,
-      media_ids: media_ids,
-      sensitivity: sensitivity,
-      visibility: visibility,
-      spoiler_text: spoiler_text,
-    );
-  }
-
-  Post fromJson(Map<String, Object?> json) {
-    return Post.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Post = _$PostTearOff();
-
-/// @nodoc
 mixin _$Post {
   String get status => throw _privateConstructorUsedError;
   String? get in_reply_to_id => throw _privateConstructorUsedError;
-  List<String>? get media_ids => throw _privateConstructorUsedError;
+  List<String> get media_ids => throw _privateConstructorUsedError;
   bool? get sensitivity => throw _privateConstructorUsedError;
   String? get visibility => throw _privateConstructorUsedError;
   String? get spoiler_text => throw _privateConstructorUsedError;
@@ -1219,7 +1045,7 @@ abstract class $PostCopyWith<$Res> {
   $Res call(
       {String status,
       String? in_reply_to_id,
-      List<String>? media_ids,
+      List<String> media_ids,
       bool? sensitivity,
       String? visibility,
       String? spoiler_text});
@@ -1254,7 +1080,7 @@ class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
       media_ids: media_ids == freezed
           ? _value.media_ids
           : media_ids // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<String>,
       sensitivity: sensitivity == freezed
           ? _value.sensitivity
           : sensitivity // ignore: cast_nullable_to_non_nullable
@@ -1279,7 +1105,7 @@ abstract class _$PostCopyWith<$Res> implements $PostCopyWith<$Res> {
   $Res call(
       {String status,
       String? in_reply_to_id,
-      List<String>? media_ids,
+      List<String> media_ids,
       bool? sensitivity,
       String? visibility,
       String? spoiler_text});
@@ -1315,7 +1141,7 @@ class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
       media_ids: media_ids == freezed
           ? _value.media_ids
           : media_ids // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<String>,
       sensitivity: sensitivity == freezed
           ? _value.sensitivity
           : sensitivity // ignore: cast_nullable_to_non_nullable
@@ -1338,29 +1164,35 @@ class _$_Post implements _Post {
   _$_Post(
       {required this.status,
       this.in_reply_to_id = null,
-      this.media_ids = null,
+      final List<String> media_ids = const [],
       this.sensitivity = null,
       this.visibility = null,
-      this.spoiler_text = null});
+      this.spoiler_text = null})
+      : _media_ids = media_ids;
 
   factory _$_Post.fromJson(Map<String, dynamic> json) => _$$_PostFromJson(json);
 
   @override
   final String status;
-  @JsonKey()
   @override
+  @JsonKey()
   final String? in_reply_to_id;
-  @JsonKey()
+  final List<String> _media_ids;
   @override
-  final List<String>? media_ids;
   @JsonKey()
+  List<String> get media_ids {
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_media_ids);
+  }
+
   @override
+  @JsonKey()
   final bool? sensitivity;
-  @JsonKey()
   @override
+  @JsonKey()
   final String? visibility;
-  @JsonKey()
   @override
+  @JsonKey()
   final String? spoiler_text;
 
   @override
@@ -1385,6 +1217,7 @@ class _$_Post implements _Post {
                 .equals(other.spoiler_text, spoiler_text));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -1408,27 +1241,27 @@ class _$_Post implements _Post {
 
 abstract class _Post implements Post {
   factory _Post(
-      {required String status,
-      String? in_reply_to_id,
-      List<String>? media_ids,
-      bool? sensitivity,
-      String? visibility,
-      String? spoiler_text}) = _$_Post;
+      {required final String status,
+      final String? in_reply_to_id,
+      final List<String> media_ids,
+      final bool? sensitivity,
+      final String? visibility,
+      final String? spoiler_text}) = _$_Post;
 
   factory _Post.fromJson(Map<String, dynamic> json) = _$_Post.fromJson;
 
   @override
-  String get status;
+  String get status => throw _privateConstructorUsedError;
   @override
-  String? get in_reply_to_id;
+  String? get in_reply_to_id => throw _privateConstructorUsedError;
   @override
-  List<String>? get media_ids;
+  List<String> get media_ids => throw _privateConstructorUsedError;
   @override
-  bool? get sensitivity;
+  bool? get sensitivity => throw _privateConstructorUsedError;
   @override
-  String? get visibility;
+  String? get visibility => throw _privateConstructorUsedError;
   @override
-  String? get spoiler_text;
+  String? get spoiler_text => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PostCopyWith<_Post> get copyWith => throw _privateConstructorUsedError;
@@ -1437,33 +1270,6 @@ abstract class _Post implements Post {
 Notification _$NotificationFromJson(Map<String, dynamic> json) {
   return _Notification.fromJson(json);
 }
-
-/// @nodoc
-class _$NotificationTearOff {
-  const _$NotificationTearOff();
-
-  _Notification call(
-      {required String id,
-      required String type,
-      required DateTime created_at,
-      required Account account,
-      required Status status}) {
-    return _Notification(
-      id: id,
-      type: type,
-      created_at: created_at,
-      account: account,
-      status: status,
-    );
-  }
-
-  Notification fromJson(Map<String, Object?> json) {
-    return Notification.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Notification = _$NotificationTearOff();
 
 /// @nodoc
 mixin _$Notification {
@@ -1655,6 +1461,7 @@ class _$_Notification implements _Notification {
             const DeepCollectionEquality().equals(other.status, status));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -1677,25 +1484,25 @@ class _$_Notification implements _Notification {
 
 abstract class _Notification implements Notification {
   factory _Notification(
-      {required String id,
-      required String type,
-      required DateTime created_at,
-      required Account account,
-      required Status status}) = _$_Notification;
+      {required final String id,
+      required final String type,
+      required final DateTime created_at,
+      required final Account account,
+      required final Status status}) = _$_Notification;
 
   factory _Notification.fromJson(Map<String, dynamic> json) =
       _$_Notification.fromJson;
 
   @override
-  String get id;
+  String get id => throw _privateConstructorUsedError;
   @override
-  String get type;
+  String get type => throw _privateConstructorUsedError;
   @override
-  DateTime get created_at;
+  DateTime get created_at => throw _privateConstructorUsedError;
   @override
-  Account get account;
+  Account get account => throw _privateConstructorUsedError;
   @override
-  Status get status;
+  Status get status => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$NotificationCopyWith<_Notification> get copyWith =>
@@ -1705,33 +1512,6 @@ abstract class _Notification implements Notification {
 TimelineRequest _$TimelineRequestFromJson(Map<String, dynamic> json) {
   return _TimelineRequest.fromJson(json);
 }
-
-/// @nodoc
-class _$TimelineRequestTearOff {
-  const _$TimelineRequestTearOff();
-
-  _TimelineRequest call(
-      {String? timeline,
-      String? hashtag,
-      int? max_id,
-      DateTime? since_id,
-      int? limit}) {
-    return _TimelineRequest(
-      timeline: timeline,
-      hashtag: hashtag,
-      max_id: max_id,
-      since_id: since_id,
-      limit: limit,
-    );
-  }
-
-  TimelineRequest fromJson(Map<String, Object?> json) {
-    return TimelineRequest.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $TimelineRequest = _$TimelineRequestTearOff();
 
 /// @nodoc
 mixin _$TimelineRequest {
@@ -1898,6 +1678,7 @@ class _$_TimelineRequest implements _TimelineRequest {
             const DeepCollectionEquality().equals(other.limit, limit));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -1920,25 +1701,25 @@ class _$_TimelineRequest implements _TimelineRequest {
 
 abstract class _TimelineRequest implements TimelineRequest {
   factory _TimelineRequest(
-      {String? timeline,
-      String? hashtag,
-      int? max_id,
-      DateTime? since_id,
-      int? limit}) = _$_TimelineRequest;
+      {final String? timeline,
+      final String? hashtag,
+      final int? max_id,
+      final DateTime? since_id,
+      final int? limit}) = _$_TimelineRequest;
 
   factory _TimelineRequest.fromJson(Map<String, dynamic> json) =
       _$_TimelineRequest.fromJson;
 
   @override
-  String? get timeline;
+  String? get timeline => throw _privateConstructorUsedError;
   @override
-  String? get hashtag;
+  String? get hashtag => throw _privateConstructorUsedError;
   @override
-  int? get max_id;
+  int? get max_id => throw _privateConstructorUsedError;
   @override
-  DateTime? get since_id;
+  DateTime? get since_id => throw _privateConstructorUsedError;
   @override
-  int? get limit;
+  int? get limit => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$TimelineRequestCopyWith<_TimelineRequest> get copyWith =>
@@ -1948,35 +1729,6 @@ abstract class _TimelineRequest implements TimelineRequest {
 Relationship _$RelationshipFromJson(Map<String, dynamic> json) {
   return _Relationship.fromJson(json);
 }
-
-/// @nodoc
-class _$RelationshipTearOff {
-  const _$RelationshipTearOff();
-
-  _Relationship call(
-      {required String id,
-      required bool following,
-      required bool followed_by,
-      required bool blocking,
-      required bool muting,
-      required bool requested}) {
-    return _Relationship(
-      id: id,
-      following: following,
-      followed_by: followed_by,
-      blocking: blocking,
-      muting: muting,
-      requested: requested,
-    );
-  }
-
-  Relationship fromJson(Map<String, Object?> json) {
-    return Relationship.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Relationship = _$RelationshipTearOff();
 
 /// @nodoc
 mixin _$Relationship {
@@ -2163,6 +1915,7 @@ class _$_Relationship implements _Relationship {
             const DeepCollectionEquality().equals(other.requested, requested));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -2186,28 +1939,28 @@ class _$_Relationship implements _Relationship {
 
 abstract class _Relationship implements Relationship {
   factory _Relationship(
-      {required String id,
-      required bool following,
-      required bool followed_by,
-      required bool blocking,
-      required bool muting,
-      required bool requested}) = _$_Relationship;
+      {required final String id,
+      required final bool following,
+      required final bool followed_by,
+      required final bool blocking,
+      required final bool muting,
+      required final bool requested}) = _$_Relationship;
 
   factory _Relationship.fromJson(Map<String, dynamic> json) =
       _$_Relationship.fromJson;
 
   @override
-  String get id;
+  String get id => throw _privateConstructorUsedError;
   @override
-  bool get following;
+  bool get following => throw _privateConstructorUsedError;
   @override
-  bool get followed_by;
+  bool get followed_by => throw _privateConstructorUsedError;
   @override
-  bool get blocking;
+  bool get blocking => throw _privateConstructorUsedError;
   @override
-  bool get muting;
+  bool get muting => throw _privateConstructorUsedError;
   @override
-  bool get requested;
+  bool get requested => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$RelationshipCopyWith<_Relationship> get copyWith =>
@@ -2217,25 +1970,6 @@ abstract class _Relationship implements Relationship {
 Report _$ReportFromJson(Map<String, dynamic> json) {
   return _Report.fromJson(json);
 }
-
-/// @nodoc
-class _$ReportTearOff {
-  const _$ReportTearOff();
-
-  _Report call({required String id, required String action_taken}) {
-    return _Report(
-      id: id,
-      action_taken: action_taken,
-    );
-  }
-
-  Report fromJson(Map<String, Object?> json) {
-    return Report.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Report = _$ReportTearOff();
 
 /// @nodoc
 mixin _$Report {
@@ -2343,6 +2077,7 @@ class _$_Report implements _Report {
                 .equals(other.action_taken, action_taken));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -2361,15 +2096,16 @@ class _$_Report implements _Report {
 }
 
 abstract class _Report implements Report {
-  factory _Report({required String id, required String action_taken}) =
-      _$_Report;
+  factory _Report(
+      {required final String id,
+      required final String action_taken}) = _$_Report;
 
   factory _Report.fromJson(Map<String, dynamic> json) = _$_Report.fromJson;
 
   @override
-  String get id;
+  String get id => throw _privateConstructorUsedError;
   @override
-  String get action_taken;
+  String get action_taken => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$ReportCopyWith<_Report> get copyWith => throw _privateConstructorUsedError;
@@ -2378,35 +2114,6 @@ abstract class _Report implements Report {
 Attachment _$AttachmentFromJson(Map<String, dynamic> json) {
   return _Attachment.fromJson(json);
 }
-
-/// @nodoc
-class _$AttachmentTearOff {
-  const _$AttachmentTearOff();
-
-  _Attachment call(
-      {required String id,
-      required String type,
-      required String url,
-      String? remote_url = null,
-      required String preview_url,
-      required String text_url}) {
-    return _Attachment(
-      id: id,
-      type: type,
-      url: url,
-      remote_url: remote_url,
-      preview_url: preview_url,
-      text_url: text_url,
-    );
-  }
-
-  Attachment fromJson(Map<String, Object?> json) {
-    return Attachment.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Attachment = _$AttachmentTearOff();
 
 /// @nodoc
 mixin _$Attachment {
@@ -2566,8 +2273,8 @@ class _$_Attachment implements _Attachment {
   final String type;
   @override
   final String url;
-  @JsonKey()
   @override
+  @JsonKey()
   final String? remote_url;
   @override
   final String preview_url;
@@ -2594,6 +2301,7 @@ class _$_Attachment implements _Attachment {
             const DeepCollectionEquality().equals(other.text_url, text_url));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -2617,28 +2325,28 @@ class _$_Attachment implements _Attachment {
 
 abstract class _Attachment implements Attachment {
   factory _Attachment(
-      {required String id,
-      required String type,
-      required String url,
-      String? remote_url,
-      required String preview_url,
-      required String text_url}) = _$_Attachment;
+      {required final String id,
+      required final String type,
+      required final String url,
+      final String? remote_url,
+      required final String preview_url,
+      required final String text_url}) = _$_Attachment;
 
   factory _Attachment.fromJson(Map<String, dynamic> json) =
       _$_Attachment.fromJson;
 
   @override
-  String get id;
+  String get id => throw _privateConstructorUsedError;
   @override
-  String get type;
+  String get type => throw _privateConstructorUsedError;
   @override
-  String get url;
+  String get url => throw _privateConstructorUsedError;
   @override
-  String? get remote_url;
+  String? get remote_url => throw _privateConstructorUsedError;
   @override
-  String get preview_url;
+  String get preview_url => throw _privateConstructorUsedError;
   @override
-  String get text_url;
+  String get text_url => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$AttachmentCopyWith<_Attachment> get copyWith =>
@@ -2648,25 +2356,6 @@ abstract class _Attachment implements Attachment {
 Tag _$TagFromJson(Map<String, dynamic> json) {
   return _Tag.fromJson(json);
 }
-
-/// @nodoc
-class _$TagTearOff {
-  const _$TagTearOff();
-
-  _Tag call({required String name, required String url}) {
-    return _Tag(
-      name: name,
-      url: url,
-    );
-  }
-
-  Tag fromJson(Map<String, Object?> json) {
-    return Tag.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Tag = _$TagTearOff();
 
 /// @nodoc
 mixin _$Tag {
@@ -2772,6 +2461,7 @@ class _$_Tag implements _Tag {
             const DeepCollectionEquality().equals(other.url, url));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -2790,14 +2480,15 @@ class _$_Tag implements _Tag {
 }
 
 abstract class _Tag implements Tag {
-  factory _Tag({required String name, required String url}) = _$_Tag;
+  factory _Tag({required final String name, required final String url}) =
+      _$_Tag;
 
   factory _Tag.fromJson(Map<String, dynamic> json) = _$_Tag.fromJson;
 
   @override
-  String get name;
+  String get name => throw _privateConstructorUsedError;
   @override
-  String get url;
+  String get url => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$TagCopyWith<_Tag> get copyWith => throw _privateConstructorUsedError;
@@ -2806,31 +2497,6 @@ abstract class _Tag implements Tag {
 Mention _$MentionFromJson(Map<String, dynamic> json) {
   return _Mention.fromJson(json);
 }
-
-/// @nodoc
-class _$MentionTearOff {
-  const _$MentionTearOff();
-
-  _Mention call(
-      {required String id,
-      required String username,
-      required String acct,
-      required String url}) {
-    return _Mention(
-      id: id,
-      username: username,
-      acct: acct,
-      url: url,
-    );
-  }
-
-  Mention fromJson(Map<String, Object?> json) {
-    return Mention.fromJson(json);
-  }
-}
-
-/// @nodoc
-const $Mention = _$MentionTearOff();
 
 /// @nodoc
 mixin _$Mention {
@@ -2969,6 +2635,7 @@ class _$_Mention implements _Mention {
             const DeepCollectionEquality().equals(other.url, url));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -2990,21 +2657,21 @@ class _$_Mention implements _Mention {
 
 abstract class _Mention implements Mention {
   factory _Mention(
-      {required String id,
-      required String username,
-      required String acct,
-      required String url}) = _$_Mention;
+      {required final String id,
+      required final String username,
+      required final String acct,
+      required final String url}) = _$_Mention;
 
   factory _Mention.fromJson(Map<String, dynamic> json) = _$_Mention.fromJson;
 
   @override
-  String get id;
+  String get id => throw _privateConstructorUsedError;
   @override
-  String get username;
+  String get username => throw _privateConstructorUsedError;
   @override
-  String get acct;
+  String get acct => throw _privateConstructorUsedError;
   @override
-  String get url;
+  String get url => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$MentionCopyWith<_Mention> get copyWith =>
