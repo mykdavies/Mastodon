@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.1
+
+- Modified null-handling for attachment fields.
+
 ## 0.3.0
 
 - Upgraded to freezed 2.0. Couple more tests added.

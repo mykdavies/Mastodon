@@ -155,9 +155,10 @@ class _$AccountCopyWithImpl<$Res> implements $AccountCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$AccountCopyWith<$Res> implements $AccountCopyWith<$Res> {
-  factory _$AccountCopyWith(_Account value, $Res Function(_Account) then) =
-      __$AccountCopyWithImpl<$Res>;
+abstract class _$$_AccountCopyWith<$Res> implements $AccountCopyWith<$Res> {
+  factory _$$_AccountCopyWith(
+          _$_Account value, $Res Function(_$_Account) then) =
+      __$$_AccountCopyWithImpl<$Res>;
   @override
   $Res call(
       {String id,
@@ -178,13 +179,13 @@ abstract class _$AccountCopyWith<$Res> implements $AccountCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$AccountCopyWithImpl<$Res> extends _$AccountCopyWithImpl<$Res>
-    implements _$AccountCopyWith<$Res> {
-  __$AccountCopyWithImpl(_Account _value, $Res Function(_Account) _then)
-      : super(_value, (v) => _then(v as _Account));
+class __$$_AccountCopyWithImpl<$Res> extends _$AccountCopyWithImpl<$Res>
+    implements _$$_AccountCopyWith<$Res> {
+  __$$_AccountCopyWithImpl(_$_Account _value, $Res Function(_$_Account) _then)
+      : super(_value, (v) => _then(v as _$_Account));
 
   @override
-  _Account get _value => super._value as _Account;
+  _$_Account get _value => super._value as _$_Account;
 
   @override
   $Res call({
@@ -204,7 +205,7 @@ class __$AccountCopyWithImpl<$Res> extends _$AccountCopyWithImpl<$Res>
     Object? header = freezed,
     Object? header_static = freezed,
   }) {
-    return _then(_Account(
+    return _then(_$_Account(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -332,7 +333,7 @@ class _$_Account implements _Account {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Account &&
+            other is _$_Account &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.username, username) &&
             const DeepCollectionEquality().equals(other.acct, acct) &&
@@ -379,8 +380,8 @@ class _$_Account implements _Account {
 
   @JsonKey(ignore: true)
   @override
-  _$AccountCopyWith<_Account> get copyWith =>
-      __$AccountCopyWithImpl<_Account>(this, _$identity);
+  _$$_AccountCopyWith<_$_Account> get copyWith =>
+      __$$_AccountCopyWithImpl<_$_Account>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -440,7 +441,7 @@ abstract class _Account implements Account {
   String get header_static => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$AccountCopyWith<_Account> get copyWith =>
+  _$$_AccountCopyWith<_$_Account> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -682,9 +683,9 @@ class _$StatusCopyWithImpl<$Res> implements $StatusCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$StatusCopyWith<$Res> implements $StatusCopyWith<$Res> {
-  factory _$StatusCopyWith(_Status value, $Res Function(_Status) then) =
-      __$StatusCopyWithImpl<$Res>;
+abstract class _$$_StatusCopyWith<$Res> implements $StatusCopyWith<$Res> {
+  factory _$$_StatusCopyWith(_$_Status value, $Res Function(_$_Status) then) =
+      __$$_StatusCopyWithImpl<$Res>;
   @override
   $Res call(
       {String id,
@@ -717,13 +718,13 @@ abstract class _$StatusCopyWith<$Res> implements $StatusCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$StatusCopyWithImpl<$Res> extends _$StatusCopyWithImpl<$Res>
-    implements _$StatusCopyWith<$Res> {
-  __$StatusCopyWithImpl(_Status _value, $Res Function(_Status) _then)
-      : super(_value, (v) => _then(v as _Status));
+class __$$_StatusCopyWithImpl<$Res> extends _$StatusCopyWithImpl<$Res>
+    implements _$$_StatusCopyWith<$Res> {
+  __$$_StatusCopyWithImpl(_$_Status _value, $Res Function(_$_Status) _then)
+      : super(_value, (v) => _then(v as _$_Status));
 
   @override
-  _Status get _value => super._value as _Status;
+  _$_Status get _value => super._value as _$_Status;
 
   @override
   $Res call({
@@ -750,7 +751,7 @@ class __$StatusCopyWithImpl<$Res> extends _$StatusCopyWithImpl<$Res>
     Object? media_attachments = freezed,
     Object? text = freezed,
   }) {
-    return _then(_Status(
+    return _then(_$_Status(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -935,8 +936,8 @@ class _$_Status implements _Status {
 
   @JsonKey(ignore: true)
   @override
-  _$StatusCopyWith<_Status> get copyWith =>
-      __$StatusCopyWithImpl<_Status>(this, _$identity);
+  _$$_StatusCopyWith<_$_Status> get copyWith =>
+      __$$_StatusCopyWithImpl<_$_Status>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -1017,7 +1018,8 @@ abstract class _Status implements Status {
   String? get text => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$StatusCopyWith<_Status> get copyWith => throw _privateConstructorUsedError;
+  _$$_StatusCopyWith<_$_Status> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 Post _$PostFromJson(Map<String, dynamic> json) {
@@ -1098,9 +1100,9 @@ class _$PostCopyWithImpl<$Res> implements $PostCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$PostCopyWith<$Res> implements $PostCopyWith<$Res> {
-  factory _$PostCopyWith(_Post value, $Res Function(_Post) then) =
-      __$PostCopyWithImpl<$Res>;
+abstract class _$$_PostCopyWith<$Res> implements $PostCopyWith<$Res> {
+  factory _$$_PostCopyWith(_$_Post value, $Res Function(_$_Post) then) =
+      __$$_PostCopyWithImpl<$Res>;
   @override
   $Res call(
       {String status,
@@ -1112,13 +1114,13 @@ abstract class _$PostCopyWith<$Res> implements $PostCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
-    implements _$PostCopyWith<$Res> {
-  __$PostCopyWithImpl(_Post _value, $Res Function(_Post) _then)
-      : super(_value, (v) => _then(v as _Post));
+class __$$_PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
+    implements _$$_PostCopyWith<$Res> {
+  __$$_PostCopyWithImpl(_$_Post _value, $Res Function(_$_Post) _then)
+      : super(_value, (v) => _then(v as _$_Post));
 
   @override
-  _Post get _value => super._value as _Post;
+  _$_Post get _value => super._value as _$_Post;
 
   @override
   $Res call({
@@ -1129,7 +1131,7 @@ class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
     Object? visibility = freezed,
     Object? spoiler_text = freezed,
   }) {
-    return _then(_Post(
+    return _then(_$_Post(
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
@@ -1139,7 +1141,7 @@ class __$PostCopyWithImpl<$Res> extends _$PostCopyWithImpl<$Res>
           : in_reply_to_id // ignore: cast_nullable_to_non_nullable
               as String?,
       media_ids: media_ids == freezed
-          ? _value.media_ids
+          ? _value._media_ids
           : media_ids // ignore: cast_nullable_to_non_nullable
               as List<String>,
       sensitivity: sensitivity == freezed
@@ -1204,11 +1206,12 @@ class _$_Post implements _Post {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Post &&
+            other is _$_Post &&
             const DeepCollectionEquality().equals(other.status, status) &&
             const DeepCollectionEquality()
                 .equals(other.in_reply_to_id, in_reply_to_id) &&
-            const DeepCollectionEquality().equals(other.media_ids, media_ids) &&
+            const DeepCollectionEquality()
+                .equals(other._media_ids, _media_ids) &&
             const DeepCollectionEquality()
                 .equals(other.sensitivity, sensitivity) &&
             const DeepCollectionEquality()
@@ -1223,15 +1226,15 @@ class _$_Post implements _Post {
       runtimeType,
       const DeepCollectionEquality().hash(status),
       const DeepCollectionEquality().hash(in_reply_to_id),
-      const DeepCollectionEquality().hash(media_ids),
+      const DeepCollectionEquality().hash(_media_ids),
       const DeepCollectionEquality().hash(sensitivity),
       const DeepCollectionEquality().hash(visibility),
       const DeepCollectionEquality().hash(spoiler_text));
 
   @JsonKey(ignore: true)
   @override
-  _$PostCopyWith<_Post> get copyWith =>
-      __$PostCopyWithImpl<_Post>(this, _$identity);
+  _$$_PostCopyWith<_$_Post> get copyWith =>
+      __$$_PostCopyWithImpl<_$_Post>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -1264,7 +1267,7 @@ abstract class _Post implements Post {
   String? get spoiler_text => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$PostCopyWith<_Post> get copyWith => throw _privateConstructorUsedError;
+  _$$_PostCopyWith<_$_Post> get copyWith => throw _privateConstructorUsedError;
 }
 
 Notification _$NotificationFromJson(Map<String, dynamic> json) {
@@ -1357,11 +1360,11 @@ class _$NotificationCopyWithImpl<$Res> implements $NotificationCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$NotificationCopyWith<$Res>
+abstract class _$$_NotificationCopyWith<$Res>
     implements $NotificationCopyWith<$Res> {
-  factory _$NotificationCopyWith(
-          _Notification value, $Res Function(_Notification) then) =
-      __$NotificationCopyWithImpl<$Res>;
+  factory _$$_NotificationCopyWith(
+          _$_Notification value, $Res Function(_$_Notification) then) =
+      __$$_NotificationCopyWithImpl<$Res>;
   @override
   $Res call(
       {String id,
@@ -1377,14 +1380,15 @@ abstract class _$NotificationCopyWith<$Res>
 }
 
 /// @nodoc
-class __$NotificationCopyWithImpl<$Res> extends _$NotificationCopyWithImpl<$Res>
-    implements _$NotificationCopyWith<$Res> {
-  __$NotificationCopyWithImpl(
-      _Notification _value, $Res Function(_Notification) _then)
-      : super(_value, (v) => _then(v as _Notification));
+class __$$_NotificationCopyWithImpl<$Res>
+    extends _$NotificationCopyWithImpl<$Res>
+    implements _$$_NotificationCopyWith<$Res> {
+  __$$_NotificationCopyWithImpl(
+      _$_Notification _value, $Res Function(_$_Notification) _then)
+      : super(_value, (v) => _then(v as _$_Notification));
 
   @override
-  _Notification get _value => super._value as _Notification;
+  _$_Notification get _value => super._value as _$_Notification;
 
   @override
   $Res call({
@@ -1394,7 +1398,7 @@ class __$NotificationCopyWithImpl<$Res> extends _$NotificationCopyWithImpl<$Res>
     Object? account = freezed,
     Object? status = freezed,
   }) {
-    return _then(_Notification(
+    return _then(_$_Notification(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1452,7 +1456,7 @@ class _$_Notification implements _Notification {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Notification &&
+            other is _$_Notification &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality()
@@ -1473,8 +1477,8 @@ class _$_Notification implements _Notification {
 
   @JsonKey(ignore: true)
   @override
-  _$NotificationCopyWith<_Notification> get copyWith =>
-      __$NotificationCopyWithImpl<_Notification>(this, _$identity);
+  _$$_NotificationCopyWith<_$_Notification> get copyWith =>
+      __$$_NotificationCopyWithImpl<_$_Notification>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -1505,7 +1509,7 @@ abstract class _Notification implements Notification {
   Status get status => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$NotificationCopyWith<_Notification> get copyWith =>
+  _$$_NotificationCopyWith<_$_Notification> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1583,11 +1587,11 @@ class _$TimelineRequestCopyWithImpl<$Res>
 }
 
 /// @nodoc
-abstract class _$TimelineRequestCopyWith<$Res>
+abstract class _$$_TimelineRequestCopyWith<$Res>
     implements $TimelineRequestCopyWith<$Res> {
-  factory _$TimelineRequestCopyWith(
-          _TimelineRequest value, $Res Function(_TimelineRequest) then) =
-      __$TimelineRequestCopyWithImpl<$Res>;
+  factory _$$_TimelineRequestCopyWith(
+          _$_TimelineRequest value, $Res Function(_$_TimelineRequest) then) =
+      __$$_TimelineRequestCopyWithImpl<$Res>;
   @override
   $Res call(
       {String? timeline,
@@ -1598,15 +1602,15 @@ abstract class _$TimelineRequestCopyWith<$Res>
 }
 
 /// @nodoc
-class __$TimelineRequestCopyWithImpl<$Res>
+class __$$_TimelineRequestCopyWithImpl<$Res>
     extends _$TimelineRequestCopyWithImpl<$Res>
-    implements _$TimelineRequestCopyWith<$Res> {
-  __$TimelineRequestCopyWithImpl(
-      _TimelineRequest _value, $Res Function(_TimelineRequest) _then)
-      : super(_value, (v) => _then(v as _TimelineRequest));
+    implements _$$_TimelineRequestCopyWith<$Res> {
+  __$$_TimelineRequestCopyWithImpl(
+      _$_TimelineRequest _value, $Res Function(_$_TimelineRequest) _then)
+      : super(_value, (v) => _then(v as _$_TimelineRequest));
 
   @override
-  _TimelineRequest get _value => super._value as _TimelineRequest;
+  _$_TimelineRequest get _value => super._value as _$_TimelineRequest;
 
   @override
   $Res call({
@@ -1616,7 +1620,7 @@ class __$TimelineRequestCopyWithImpl<$Res>
     Object? since_id = freezed,
     Object? limit = freezed,
   }) {
-    return _then(_TimelineRequest(
+    return _then(_$_TimelineRequest(
       timeline: timeline == freezed
           ? _value.timeline
           : timeline // ignore: cast_nullable_to_non_nullable
@@ -1670,7 +1674,7 @@ class _$_TimelineRequest implements _TimelineRequest {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _TimelineRequest &&
+            other is _$_TimelineRequest &&
             const DeepCollectionEquality().equals(other.timeline, timeline) &&
             const DeepCollectionEquality().equals(other.hashtag, hashtag) &&
             const DeepCollectionEquality().equals(other.max_id, max_id) &&
@@ -1690,8 +1694,8 @@ class _$_TimelineRequest implements _TimelineRequest {
 
   @JsonKey(ignore: true)
   @override
-  _$TimelineRequestCopyWith<_TimelineRequest> get copyWith =>
-      __$TimelineRequestCopyWithImpl<_TimelineRequest>(this, _$identity);
+  _$$_TimelineRequestCopyWith<_$_TimelineRequest> get copyWith =>
+      __$$_TimelineRequestCopyWithImpl<_$_TimelineRequest>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -1722,7 +1726,7 @@ abstract class _TimelineRequest implements TimelineRequest {
   int? get limit => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$TimelineRequestCopyWith<_TimelineRequest> get copyWith =>
+  _$$_TimelineRequestCopyWith<_$_TimelineRequest> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1806,11 +1810,11 @@ class _$RelationshipCopyWithImpl<$Res> implements $RelationshipCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$RelationshipCopyWith<$Res>
+abstract class _$$_RelationshipCopyWith<$Res>
     implements $RelationshipCopyWith<$Res> {
-  factory _$RelationshipCopyWith(
-          _Relationship value, $Res Function(_Relationship) then) =
-      __$RelationshipCopyWithImpl<$Res>;
+  factory _$$_RelationshipCopyWith(
+          _$_Relationship value, $Res Function(_$_Relationship) then) =
+      __$$_RelationshipCopyWithImpl<$Res>;
   @override
   $Res call(
       {String id,
@@ -1822,14 +1826,15 @@ abstract class _$RelationshipCopyWith<$Res>
 }
 
 /// @nodoc
-class __$RelationshipCopyWithImpl<$Res> extends _$RelationshipCopyWithImpl<$Res>
-    implements _$RelationshipCopyWith<$Res> {
-  __$RelationshipCopyWithImpl(
-      _Relationship _value, $Res Function(_Relationship) _then)
-      : super(_value, (v) => _then(v as _Relationship));
+class __$$_RelationshipCopyWithImpl<$Res>
+    extends _$RelationshipCopyWithImpl<$Res>
+    implements _$$_RelationshipCopyWith<$Res> {
+  __$$_RelationshipCopyWithImpl(
+      _$_Relationship _value, $Res Function(_$_Relationship) _then)
+      : super(_value, (v) => _then(v as _$_Relationship));
 
   @override
-  _Relationship get _value => super._value as _Relationship;
+  _$_Relationship get _value => super._value as _$_Relationship;
 
   @override
   $Res call({
@@ -1840,7 +1845,7 @@ class __$RelationshipCopyWithImpl<$Res> extends _$RelationshipCopyWithImpl<$Res>
     Object? muting = freezed,
     Object? requested = freezed,
   }) {
-    return _then(_Relationship(
+    return _then(_$_Relationship(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -1905,7 +1910,7 @@ class _$_Relationship implements _Relationship {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Relationship &&
+            other is _$_Relationship &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.following, following) &&
             const DeepCollectionEquality()
@@ -1928,8 +1933,8 @@ class _$_Relationship implements _Relationship {
 
   @JsonKey(ignore: true)
   @override
-  _$RelationshipCopyWith<_Relationship> get copyWith =>
-      __$RelationshipCopyWithImpl<_Relationship>(this, _$identity);
+  _$$_RelationshipCopyWith<_$_Relationship> get copyWith =>
+      __$$_RelationshipCopyWithImpl<_$_Relationship>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -1963,7 +1968,7 @@ abstract class _Relationship implements Relationship {
   bool get requested => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$RelationshipCopyWith<_Relationship> get copyWith =>
+  _$$_RelationshipCopyWith<_$_Relationship> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2015,28 +2020,28 @@ class _$ReportCopyWithImpl<$Res> implements $ReportCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$ReportCopyWith<$Res> implements $ReportCopyWith<$Res> {
-  factory _$ReportCopyWith(_Report value, $Res Function(_Report) then) =
-      __$ReportCopyWithImpl<$Res>;
+abstract class _$$_ReportCopyWith<$Res> implements $ReportCopyWith<$Res> {
+  factory _$$_ReportCopyWith(_$_Report value, $Res Function(_$_Report) then) =
+      __$$_ReportCopyWithImpl<$Res>;
   @override
   $Res call({String id, String action_taken});
 }
 
 /// @nodoc
-class __$ReportCopyWithImpl<$Res> extends _$ReportCopyWithImpl<$Res>
-    implements _$ReportCopyWith<$Res> {
-  __$ReportCopyWithImpl(_Report _value, $Res Function(_Report) _then)
-      : super(_value, (v) => _then(v as _Report));
+class __$$_ReportCopyWithImpl<$Res> extends _$ReportCopyWithImpl<$Res>
+    implements _$$_ReportCopyWith<$Res> {
+  __$$_ReportCopyWithImpl(_$_Report _value, $Res Function(_$_Report) _then)
+      : super(_value, (v) => _then(v as _$_Report));
 
   @override
-  _Report get _value => super._value as _Report;
+  _$_Report get _value => super._value as _$_Report;
 
   @override
   $Res call({
     Object? id = freezed,
     Object? action_taken = freezed,
   }) {
-    return _then(_Report(
+    return _then(_$_Report(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -2071,7 +2076,7 @@ class _$_Report implements _Report {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Report &&
+            other is _$_Report &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality()
                 .equals(other.action_taken, action_taken));
@@ -2086,8 +2091,8 @@ class _$_Report implements _Report {
 
   @JsonKey(ignore: true)
   @override
-  _$ReportCopyWith<_Report> get copyWith =>
-      __$ReportCopyWithImpl<_Report>(this, _$identity);
+  _$$_ReportCopyWith<_$_Report> get copyWith =>
+      __$$_ReportCopyWithImpl<_$_Report>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -2108,7 +2113,8 @@ abstract class _Report implements Report {
   String get action_taken => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$ReportCopyWith<_Report> get copyWith => throw _privateConstructorUsedError;
+  _$$_ReportCopyWith<_$_Report> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 Attachment _$AttachmentFromJson(Map<String, dynamic> json) {
@@ -2122,7 +2128,7 @@ mixin _$Attachment {
   String get url => throw _privateConstructorUsedError;
   String? get remote_url => throw _privateConstructorUsedError;
   String get preview_url => throw _privateConstructorUsedError;
-  String get text_url => throw _privateConstructorUsedError;
+  String? get text_url => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -2141,7 +2147,7 @@ abstract class $AttachmentCopyWith<$Res> {
       String url,
       String? remote_url,
       String preview_url,
-      String text_url});
+      String? text_url});
 }
 
 /// @nodoc
@@ -2185,16 +2191,17 @@ class _$AttachmentCopyWithImpl<$Res> implements $AttachmentCopyWith<$Res> {
       text_url: text_url == freezed
           ? _value.text_url
           : text_url // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
 
 /// @nodoc
-abstract class _$AttachmentCopyWith<$Res> implements $AttachmentCopyWith<$Res> {
-  factory _$AttachmentCopyWith(
-          _Attachment value, $Res Function(_Attachment) then) =
-      __$AttachmentCopyWithImpl<$Res>;
+abstract class _$$_AttachmentCopyWith<$Res>
+    implements $AttachmentCopyWith<$Res> {
+  factory _$$_AttachmentCopyWith(
+          _$_Attachment value, $Res Function(_$_Attachment) then) =
+      __$$_AttachmentCopyWithImpl<$Res>;
   @override
   $Res call(
       {String id,
@@ -2202,18 +2209,18 @@ abstract class _$AttachmentCopyWith<$Res> implements $AttachmentCopyWith<$Res> {
       String url,
       String? remote_url,
       String preview_url,
-      String text_url});
+      String? text_url});
 }
 
 /// @nodoc
-class __$AttachmentCopyWithImpl<$Res> extends _$AttachmentCopyWithImpl<$Res>
-    implements _$AttachmentCopyWith<$Res> {
-  __$AttachmentCopyWithImpl(
-      _Attachment _value, $Res Function(_Attachment) _then)
-      : super(_value, (v) => _then(v as _Attachment));
+class __$$_AttachmentCopyWithImpl<$Res> extends _$AttachmentCopyWithImpl<$Res>
+    implements _$$_AttachmentCopyWith<$Res> {
+  __$$_AttachmentCopyWithImpl(
+      _$_Attachment _value, $Res Function(_$_Attachment) _then)
+      : super(_value, (v) => _then(v as _$_Attachment));
 
   @override
-  _Attachment get _value => super._value as _Attachment;
+  _$_Attachment get _value => super._value as _$_Attachment;
 
   @override
   $Res call({
@@ -2224,7 +2231,7 @@ class __$AttachmentCopyWithImpl<$Res> extends _$AttachmentCopyWithImpl<$Res>
     Object? preview_url = freezed,
     Object? text_url = freezed,
   }) {
-    return _then(_Attachment(
+    return _then(_$_Attachment(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -2248,7 +2255,7 @@ class __$AttachmentCopyWithImpl<$Res> extends _$AttachmentCopyWithImpl<$Res>
       text_url: text_url == freezed
           ? _value.text_url
           : text_url // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
     ));
   }
 }
@@ -2262,7 +2269,7 @@ class _$_Attachment implements _Attachment {
       required this.url,
       this.remote_url = null,
       required this.preview_url,
-      required this.text_url});
+      this.text_url = null});
 
   factory _$_Attachment.fromJson(Map<String, dynamic> json) =>
       _$$_AttachmentFromJson(json);
@@ -2279,7 +2286,8 @@ class _$_Attachment implements _Attachment {
   @override
   final String preview_url;
   @override
-  final String text_url;
+  @JsonKey()
+  final String? text_url;
 
   @override
   String toString() {
@@ -2290,7 +2298,7 @@ class _$_Attachment implements _Attachment {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Attachment &&
+            other is _$_Attachment &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.type, type) &&
             const DeepCollectionEquality().equals(other.url, url) &&
@@ -2314,8 +2322,8 @@ class _$_Attachment implements _Attachment {
 
   @JsonKey(ignore: true)
   @override
-  _$AttachmentCopyWith<_Attachment> get copyWith =>
-      __$AttachmentCopyWithImpl<_Attachment>(this, _$identity);
+  _$$_AttachmentCopyWith<_$_Attachment> get copyWith =>
+      __$$_AttachmentCopyWithImpl<_$_Attachment>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -2330,7 +2338,7 @@ abstract class _Attachment implements Attachment {
       required final String url,
       final String? remote_url,
       required final String preview_url,
-      required final String text_url}) = _$_Attachment;
+      final String? text_url}) = _$_Attachment;
 
   factory _Attachment.fromJson(Map<String, dynamic> json) =
       _$_Attachment.fromJson;
@@ -2346,10 +2354,10 @@ abstract class _Attachment implements Attachment {
   @override
   String get preview_url => throw _privateConstructorUsedError;
   @override
-  String get text_url => throw _privateConstructorUsedError;
+  String? get text_url => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$AttachmentCopyWith<_Attachment> get copyWith =>
+  _$$_AttachmentCopyWith<_$_Attachment> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -2401,28 +2409,28 @@ class _$TagCopyWithImpl<$Res> implements $TagCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$TagCopyWith<$Res> implements $TagCopyWith<$Res> {
-  factory _$TagCopyWith(_Tag value, $Res Function(_Tag) then) =
-      __$TagCopyWithImpl<$Res>;
+abstract class _$$_TagCopyWith<$Res> implements $TagCopyWith<$Res> {
+  factory _$$_TagCopyWith(_$_Tag value, $Res Function(_$_Tag) then) =
+      __$$_TagCopyWithImpl<$Res>;
   @override
   $Res call({String name, String url});
 }
 
 /// @nodoc
-class __$TagCopyWithImpl<$Res> extends _$TagCopyWithImpl<$Res>
-    implements _$TagCopyWith<$Res> {
-  __$TagCopyWithImpl(_Tag _value, $Res Function(_Tag) _then)
-      : super(_value, (v) => _then(v as _Tag));
+class __$$_TagCopyWithImpl<$Res> extends _$TagCopyWithImpl<$Res>
+    implements _$$_TagCopyWith<$Res> {
+  __$$_TagCopyWithImpl(_$_Tag _value, $Res Function(_$_Tag) _then)
+      : super(_value, (v) => _then(v as _$_Tag));
 
   @override
-  _Tag get _value => super._value as _Tag;
+  _$_Tag get _value => super._value as _$_Tag;
 
   @override
   $Res call({
     Object? name = freezed,
     Object? url = freezed,
   }) {
-    return _then(_Tag(
+    return _then(_$_Tag(
       name: name == freezed
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -2456,7 +2464,7 @@ class _$_Tag implements _Tag {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Tag &&
+            other is _$_Tag &&
             const DeepCollectionEquality().equals(other.name, name) &&
             const DeepCollectionEquality().equals(other.url, url));
   }
@@ -2470,8 +2478,8 @@ class _$_Tag implements _Tag {
 
   @JsonKey(ignore: true)
   @override
-  _$TagCopyWith<_Tag> get copyWith =>
-      __$TagCopyWithImpl<_Tag>(this, _$identity);
+  _$$_TagCopyWith<_$_Tag> get copyWith =>
+      __$$_TagCopyWithImpl<_$_Tag>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -2491,7 +2499,7 @@ abstract class _Tag implements Tag {
   String get url => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$TagCopyWith<_Tag> get copyWith => throw _privateConstructorUsedError;
+  _$$_TagCopyWith<_$_Tag> get copyWith => throw _privateConstructorUsedError;
 }
 
 Mention _$MentionFromJson(Map<String, dynamic> json) {
@@ -2554,21 +2562,22 @@ class _$MentionCopyWithImpl<$Res> implements $MentionCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$MentionCopyWith<$Res> implements $MentionCopyWith<$Res> {
-  factory _$MentionCopyWith(_Mention value, $Res Function(_Mention) then) =
-      __$MentionCopyWithImpl<$Res>;
+abstract class _$$_MentionCopyWith<$Res> implements $MentionCopyWith<$Res> {
+  factory _$$_MentionCopyWith(
+          _$_Mention value, $Res Function(_$_Mention) then) =
+      __$$_MentionCopyWithImpl<$Res>;
   @override
   $Res call({String id, String username, String acct, String url});
 }
 
 /// @nodoc
-class __$MentionCopyWithImpl<$Res> extends _$MentionCopyWithImpl<$Res>
-    implements _$MentionCopyWith<$Res> {
-  __$MentionCopyWithImpl(_Mention _value, $Res Function(_Mention) _then)
-      : super(_value, (v) => _then(v as _Mention));
+class __$$_MentionCopyWithImpl<$Res> extends _$MentionCopyWithImpl<$Res>
+    implements _$$_MentionCopyWith<$Res> {
+  __$$_MentionCopyWithImpl(_$_Mention _value, $Res Function(_$_Mention) _then)
+      : super(_value, (v) => _then(v as _$_Mention));
 
   @override
-  _Mention get _value => super._value as _Mention;
+  _$_Mention get _value => super._value as _$_Mention;
 
   @override
   $Res call({
@@ -2577,7 +2586,7 @@ class __$MentionCopyWithImpl<$Res> extends _$MentionCopyWithImpl<$Res>
     Object? acct = freezed,
     Object? url = freezed,
   }) {
-    return _then(_Mention(
+    return _then(_$_Mention(
       id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -2628,7 +2637,7 @@ class _$_Mention implements _Mention {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Mention &&
+            other is _$_Mention &&
             const DeepCollectionEquality().equals(other.id, id) &&
             const DeepCollectionEquality().equals(other.username, username) &&
             const DeepCollectionEquality().equals(other.acct, acct) &&
@@ -2646,8 +2655,8 @@ class _$_Mention implements _Mention {
 
   @JsonKey(ignore: true)
   @override
-  _$MentionCopyWith<_Mention> get copyWith =>
-      __$MentionCopyWithImpl<_Mention>(this, _$identity);
+  _$$_MentionCopyWith<_$_Mention> get copyWith =>
+      __$$_MentionCopyWithImpl<_$_Mention>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
@@ -2674,6 +2683,6 @@ abstract class _Mention implements Mention {
   String get url => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$MentionCopyWith<_Mention> get copyWith =>
+  _$$_MentionCopyWith<_$_Mention> get copyWith =>
       throw _privateConstructorUsedError;
 }

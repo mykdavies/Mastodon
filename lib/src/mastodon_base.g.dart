@@ -201,7 +201,7 @@ _$_Attachment _$$_AttachmentFromJson(Map<String, dynamic> json) =>
       url: json['url'] as String,
       remote_url: json['remote_url'] as String? ?? null,
       preview_url: json['preview_url'] as String,
-      text_url: json['text_url'] as String,
+      text_url: json['text_url'] as String? ?? null,
     );
 
 Map<String, dynamic> _$$_AttachmentToJson(_$_Attachment instance) =>

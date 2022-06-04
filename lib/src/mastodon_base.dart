@@ -182,7 +182,7 @@ class Attachment with _$Attachment {
     required String url,
     @Default(null) String? remote_url,
     required String preview_url,
-    required String text_url,
+    @Default(null) String? text_url,
   }) = _Attachment;
 
   /// Construct an Attachmet object from a JSON structure.
